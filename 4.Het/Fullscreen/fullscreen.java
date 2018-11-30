@@ -1,8 +1,8 @@
 import java.awt.Toolkit;
 
-public class NewJFrame extends javax.swing.JFrame {
+public class fullscreen extends javax.swing.JFrame {
 
-    public NewJFrame() {
+    public fullscreen() {
         setUndecorated(true);
         setAlwaysOnTop(true);
         setResizable(false);
@@ -101,7 +101,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new fullscreen().setVisible(true);
             }
         });
     }
