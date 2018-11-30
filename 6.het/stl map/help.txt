@@ -1,0 +1,4 @@
+g++ -I/home/batfai/boost66/include/ -L/home/batfai/boost66/lib/ player.hpp Fenykard.cpp -o fenykard -lboost_system -lboost_filesystem -lboost_program_options -lboost_date_time -std=c++14
+
+
+./fenykard --trad-lab-mark --roots City/Debrecen/Oktatás/Informatika/Programozás/DEIK/Prog1/Labor/Védés/I City/Debrecen/Oktatás/Informatika/Programozás/DEIK/Prog1/Labor/Védés/II City/Debrecen/Oktatás/Informatika/Programozás/DEIK/Prog1/Labor/Védés/III -v --db=db-2018-04-14.csv

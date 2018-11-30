@@ -1,0 +1,2 @@
+A Map filozófiája az, hogy egyedi kulcsokat rögzít, és a kulcsokhoz értékeket párosít. A kettő együtt jelent egy elemet (entry), ezek darabszáma adja a Map méretét.
+A kulcsoknak mindenképpen egyedieknek kell lenniük, az értékekkel kapcsolatban nincs megkötés. Ha már egy meglévő kulccsal adnánk hozzá új értéket, akkor a meglévő kulcshoz tartozó értéket cseréli ki az új értékre.
