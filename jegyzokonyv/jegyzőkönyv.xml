@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.1/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.1/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<book xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.1">
+    <info>
+        <title>Jegyzőkönyv</title>
+        <author>
+            <personname>Szilágyi-Czumbil Ede Balázs</personname>
+            <personblurb>
+                <para>Neptun kód: CMY9W3</para>
+                <para>
+                    Git repó:<link>https://github.com/edeszilagyi/Prog2</link>
+                </para>
+                <para>e-mail: <email>ede.szilagyi@yahoo.com</email></para>
+            </personblurb>
+           
+        </author>
+    </info>
+    <part>
+        <title/>
+        <chapter>
+            <title>0. hét - „Helló, Berners-Lee!</title>
+            <sect1>
+                <title>Java, C++ összehasonlítás</title>
+                <para>Könyvek:C++: Benedek Zoltán, Levendovszky Tihamér Szoftverfejlesztés C++
+                    nyelven Java: Nyékyné Dr. Gaizler Judit et al. Java 2 útikalauz programozóknak
+                    5.0 I-II</para>
+                <para>A Java nyelv teljesen objektum orientált nyelv. Ezzel szemben a C++ lehetőséget ad a generikus programozásra is. 
+                    A két programnyelv változó kezelése eltérő. Java esetén minden objektum referencia. Ez azt
+                    jelenti, hogy az értéküket közvetlen a referencián keresztül érjük el. Mindkét nyelv támogatja a publikus, privát és statikus objektum kezelést.
+                    Fordító szempontjából amíg a C++ kódot elég natívan fordítani, addig a Java-hoz szükség van egy virtuális
+                    fordítóra, ami futtatja a kódot. Emiatt nagyobb az eroforrás igénye is.Java-ban nem nagyon kell foglalkozni a memória szeméttel, mivel van automatikus garbage collector, ami
+                    üríti azt, míg C++-nál fel kell szabadítani a memóriát
+                    </para>
+            </sect1>
+            <sect1>
+                <title>Python</title>
+                <para>Könyv: Forstner Bertalan, Ekler Péter, Kelényi Imre: Bevezetés a mobilprogramozásba.
+                    Gyors prototípus-fejlesztés Python és Java nyelven</para>
+                <para>  A Python tulajdonképpen egy szkriptnyelv, de nagyon sok csomagot is és beépített
+                    eljárást is tartalmaz, ezért komolyabb alkalmazások megírására és komolyabb problémák
+                    megoldására is használható.Más modulokkal is együtt tud működni egy Python komponens. A
+                    Python egy nagyon magas szintű programozási nyelv.  Pyton esetén nincs szükség
+                    fordítás-ra. A Python interpreter elérhető számos platformon. A Pythont könyű hasznáni,
+                    megbízható és jelentős támogatást biztosít hibák javítására. A Pythonban minden adat
+                    objektumként szerepel. A rajtuk végzendő műveleteket az objektum típusa határozza meg,
+                    amit a rendszer futási idoben határoz meg, így nekünk nem kell megadni. A következő
+                    típusok lehetnek: szám, string, tuple, list, dictionary. A számok lehetnek egészek,
+                    decimálisak, oktálisak vagy akár hexadecimálisak is. Szöveg típus esetén a szöveget két
+                    aposztróf közé írva kell megadni.</para>
+            </sect1>
+        </chapter>
+    </part>
+</book>
