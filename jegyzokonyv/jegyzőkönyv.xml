@@ -7,13 +7,11 @@
         <title>Jegyzőkönyv</title>
         <author>
             <personname>Szilágyi-Czumbil Ede Balázs</personname>
-            <personblurb>
-                <para>Neptun kód: CMY9W3</para>
-                <para>
-                    Git repó:<link>https://github.com/edeszilagyi/Prog2</link>
-                </para>
-                <para>e-mail: <email>ede.szilagyi@yahoo.com</email></para>
-            </personblurb>
+            
+            <personblurb><para>Neptun kód: CMY9W3</para></personblurb>
+            <personblurb><para>Git repó:<link>https://github.com/edeszilagyi/Prog2</link></para></personblurb>
+            <personblurb><para>e-mail: <email>ede.szilagyi@yahoo.com</email></para></personblurb>
+           
            
         </author>
     </info>
@@ -50,6 +48,124 @@
                     decimálisak, oktálisak vagy akár hexadecimálisak is. Szöveg típus esetén a szöveget két
                     aposztróf közé írva kell megadni.</para>
             </sect1>
+        </chapter>
+        <chapter>
+            <title>1. hét - „Helló, Arroway!”</title>
+            <sect1>
+                <title>OO szemlélet</title>
+                <para>A módosított polártranszformációs normális generátor beprogramozása Java nyelven. Mutassunk rá, hogy
+                    a mi természetes saját megoldásunk (az algoritmus egyszerre két normálist állít elo, kell egy példánytag, ˝
+                    amely a nem visszaadottat tárolja és egy logikai tag, hogy van-e tárolt vagy futtatni kell az algot.) és az
+                    OpenJDK, Oracle JDK-ban a Sun által adott OO szervezés ua.!
+                    Segédlink: <link>https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_5.pdf</link> (16-22 fólia)</para>
+                <para>A feladat lényege, hogy készítsünk egy olyan Java programot, amely két normális eloszlású számot állít elo˝
+                    és hasonlítsuk össze a JDK fejleszto álltal készített polártranszformációs algoritmussal. </para>
+                <para>A kód:</para>
+                <programlisting>public class PolarGenerator {
+
+	boolean nincsTarolt = true;
+	double tarolt;
+	
+	public PolarGenerator() {
+		nincsTarolt = true;
+	}
+	
+	public double kovetkezo() {
+		if(nincsTarolt) {
+			double u1, u2, v1, v2, w;
+			do {
+				u1 = Math.random();
+				u2 = Math.random();
+				
+				v1 = 2 * u1 - 1;
+				v2 = 2 * u2 - 1;
+				
+				w = v1 * v1 + v2 * v2;
+			} while(w > 1);
+			double r = Math.sqrt(-2 * Math.log(w) / w);
+			
+			tarolt = r * v2;
+			
+			nincsTarolt = !nincsTarolt;
+			return r * v1;
+		} else {
+			nincsTarolt = !nincsTarolt;
+			return tarolt;
+		}
+	}
+	
+	public static void main(String[] args) {
+		PolarGenerator pg = new PolarGenerator();
+		
+		for(int i = 0; i &lt; 10; i++) {
+			System.out.println(pg.kovetkezo());
+		}
+	}
+}
+</programlisting>
+                <para>Miután futtatuk:<inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/oomegold.jpg"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                
+            </sect1>
+            <sect1>
+                <title>„Gagyi”:</title>
+                <para>Az ismert formális2 „while (x &lt;= t &amp;&amp; x >= t &amp;&amp; t != x);”
+                    tesztkérdéstípusra adj a szokásosnál (miszerint x, t az egyik esetben az
+                    objektum által hordozott érték, a másikban meg az objektum referenciája)
+                    „mélyebb” választ, írj Java példaprogramot mely egyszer végtelen ciklus, más x,
+                    t értékekkel meg nem! A példát építsd a JDK Integer.java forrására3 , hogy a
+                    128-nál inkluzív objektum példányokat poolozza! </para>
+                <para>a program ami végtelen ciklust ad:</para>
+                <programlisting>public class Gagyi {
+
+	public static void main(String[] args) {
+		
+		
+		Integer i = 130;
+		Integer j = 130;
+		
+		System.out.println("i = " + i + " j = " + j);
+
+		while(i &lt;= j &amp;&amp; i >= j &amp;&amp; i != j) {
+			
+		}	
+		
+	}
+}
+</programlisting>
+                <para>lefuttatva:<inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/gagyimegold1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para>a program ami nem végtelen ciklust ad:</para>
+                <programlisting>public class Gagyi {
+
+	public static void main(String[] args) {
+		
+		Integer i = 10;
+		Integer j = 10;
+		
+		System.out.println("i = " + i + " j = " + j);
+
+		while(i &lt;= j &amp;&amp; i >= j &amp;&amp; i != j) {
+			
+		}	
+		
+	}
+}
+</programlisting>
+                <para>lefuttatva:<inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/gagyimegold2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                
+            </sect1>
+            
         </chapter>
     </part>
 </book>
