@@ -11,8 +11,8 @@
             <personblurb><para>Neptun kód: CMY9W3</para></personblurb>
             <personblurb><para>Git repó:<link>https://github.com/edeszilagyi/Prog2</link></para></personblurb>
             <personblurb><para>e-mail: <email>ede.szilagyi@yahoo.com</email></para></personblurb>
-           
-           
+            
+            
         </author>
     </info>
     <part>
@@ -30,7 +30,7 @@
                     Fordító szempontjából amíg a C++ kódot elég natívan fordítani, addig a Java-hoz szükség van egy virtuális
                     fordítóra, ami futtatja a kódot. Emiatt nagyobb az eroforrás igénye is.Java-ban nem nagyon kell foglalkozni a memória szeméttel, mivel van automatikus garbage collector, ami
                     üríti azt, míg C++-nál fel kell szabadítani a memóriát
-                    </para>
+                </para>
             </sect1>
             <sect1>
                 <title>Python</title>
@@ -103,11 +103,12 @@
 	}
 }
 </programlisting>
-                <para>Miután futtatuk:<inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="kepek/oomegold.jpg"/>
-                        </imageobject>
-                    </inlinemediaobject></para>
+                <para>Miután futtatuk:</para>
+                <para><inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/oomegold.jpg"/>
+                    </imageobject>
+                </inlinemediaobject></para>
                 
             </sect1>
             <sect1>
@@ -136,11 +137,12 @@
 	}
 }
 </programlisting>
-                <para>lefuttatva:<inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="kepek/gagyimegold1.png"/>
-                        </imageobject>
-                    </inlinemediaobject></para>
+                <para>lefuttatva:</para>
+                <para><inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/gagyimegold1.png"/>
+                    </imageobject>
+                </inlinemediaobject></para>
                 <para>a program ami nem végtelen ciklust ad:</para>
                 <programlisting>public class Gagyi {
 
@@ -158,14 +160,55 @@
 	}
 }
 </programlisting>
-                <para>lefuttatva:<inlinemediaobject>
-                        <imageobject>
-                            <imagedata fileref="kepek/gagyimegold2.png"/>
-                        </imageobject>
-                    </inlinemediaobject></para>
+                <para>lefuttatva:</para>
+                <para><inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/gagyimegold2.png"/>
+                    </imageobject>
+                </inlinemediaobject></para>
                 
             </sect1>
-            
+            <sect1>
+                <title>Yoda</title>
+                <para>Írjunk olyan Java programot, ami java.lang.NullPointerEx-el leáll, ha nem követjük a Yoda
+                    conditions-t! <link>https://en.wikipedia.org/wiki/Yoda_conditions</link>
+                </para>
+                <para>A kód:</para>
+                <programlisting>public class Yoda {
+
+	public static void main(String[] args) {
+		
+		final String str = null;
+		
+		try {
+			if(str.equals("...")) {
+				//Do something
+			}
+			System.out.println("1. Success");
+
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		try {
+			if("...".equals(str)) {
+				//Do something
+			}
+			System.out.println("2. Success");
+
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
+}
+</programlisting>
+                <para>Lefuttatva:</para>
+                <para><inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/yodamegold.jpg"/>
+                    </imageobject>
+                </inlinemediaobject></para>
+            </sect1>
         </chapter>
     </part>
 </book>
