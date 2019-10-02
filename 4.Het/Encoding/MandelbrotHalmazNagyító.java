@@ -1,74 +1,91 @@
 /*
- * MandelbrotHalmazNagyÃ­tÃ³.java
+ * MandelbrotHalmazNagyító.java
  *
- * DIGIT 2005, Javat tanÃ­tok
- * BÃ¡tfai Norbert, nbatfai@inf.unideb.hu
+ * DIGIT 2005, Javat tanítok
+ * Bátfai Norbert, nbatfai@inf.unideb.hu
  *
  */
 /**
- * A Mandelbrot halmazt nagyÃ­tÃ³ Ã©s kirajzolÃ³ osztÃ¡ly.
+ * A Mandelbrot halmazt nagyító és kirajzoló osztály.
  *
- * @author BÃ¡tfai Norbert, nbatfai@inf.unideb.hu
- * @version 0.0.1
+ * @author Bátfai Norbert, nbatfai@inf.unideb.hu
+ * @version 0.0.2
  */
-public class MandelbrotHalmazNagyÃ­tÃ³ extends MandelbrotHalmaz {
-    /** A nagyÃ­tandÃ³ kijelÃ¶lt terÃ¼letet bal felsÅ‘ sarka. */
+public class MandelbrotHalmazNagyító extends MandelbrotHalmaz {
+    /** A nagyítandó kijelölt területet bal felsõ sarka. */
     private int x, y;
-    /** A nagyÃ­tandÃ³ kijelÃ¶lt terÃ¼let szÃ©lessÃ©ge Ã©s magassÃ¡ga. */
+    /** A nagyítandó kijelölt terület szélessége és magassága. */
     private int mx, my;
     /**
-     * LÃ©trehoz egy a Mandelbrot halmazt a komplex sÃ­k
-     * [a,b]x[c,d] tartomÃ¡nya felett kiszÃ¡molÃ³ Ã©s nygÃ­tani tudÃ³
-     * <code>MandelbrotHalmazNagyÃ­tÃ³</code> objektumot.
+     * Létrehoz egy a Mandelbrot halmazt a komplex sík
+     * [a,b]x[c,d] tartománya felett kiszámoló és nygítani tudó
+     * <code>MandelbrotHalmazNagyító</code> objektumot.
      *
-     * @param      a              a [a,b]x[c,d] tartomÃ¡ny a koordinÃ¡tÃ¡ja.
-     * @param      b              a [a,b]x[c,d] tartomÃ¡ny b koordinÃ¡tÃ¡ja.
-     * @param      c              a [a,b]x[c,d] tartomÃ¡ny c koordinÃ¡tÃ¡ja.
-     * @param      d              a [a,b]x[c,d] tartomÃ¡ny d koordinÃ¡tÃ¡ja.
-     * @param      szÃ©lessÃ©g      a halmazt tartalmazÃ³ tÃ¶mb szÃ©lessÃ©ge.
-     * @param      iterÃ¡ciÃ³sHatÃ¡r a szÃ¡mÃ­tÃ¡s pontossÃ¡ga.
+     * @param      a              a [a,b]x[c,d] tartomány a koordinátája.
+     * @param      b              a [a,b]x[c,d] tartomány b koordinátája.
+     * @param      c              a [a,b]x[c,d] tartomány c koordinátája.
+     * @param      d              a [a,b]x[c,d] tartomány d koordinátája.
+     * @param      szélesség      a halmazt tartalmazó tömb szélessége.
+     * @param      iterációsHatár a számítás pontossága.
      */
-    public MandelbrotHalmazNagyÃ­tÃ³(double a, double b, double c, double d,
-            int szÃ©lessÃ©g, int iterÃ¡ciÃ³sHatÃ¡r) {
-        // Az Å‘s osztÃ¡ly konstruktorÃ¡nak hÃ­vÃ¡sa
-        super(a, b, c, d, szÃ©lessÃ©g, iterÃ¡ciÃ³sHatÃ¡r);
-        setTitle("A Mandelbrot halmaz nagyÃ­tÃ¡sai");
-        // EgÃ©r kattintÃ³ esemÃ©nyek feldolgozÃ¡sa:
+    public MandelbrotHalmazNagyító(double a, double b, double c, double d,
+            int szélesség, int iterációsHatár) {
+        // Az õs osztály konstruktorának hívása
+        super(a, b, c, d, szélesség, iterációsHatár);
+        setTitle("A Mandelbrot halmaz nagyításai");
+        // Egér kattintó események feldolgozása:
         addMouseListener(new java.awt.event.MouseAdapter() {
-            // EgÃ©r kattintÃ¡ssal jelÃ¶ljÃ¼k ki a nagyÃ­tandÃ³ terÃ¼letet
-            // bal felsÅ‘ sarkÃ¡t:
+            // Egér kattintással jelöljük ki a nagyítandó területet
+            // bal felsõ sarkát vagy ugyancsak egér kattintással
+            // vizsgáljuk egy adott pont iterációit:
             public void mousePressed(java.awt.event.MouseEvent m) {
-                // A nagyÃ­tandÃ³ kijelÃ¶lt terÃ¼letet bal felsÅ‘ sarka:
+                // Az egérmutató pozíciója
                 x = m.getX();
                 y = m.getY();
-                mx = 0;
-                my = 0;
-                repaint();
+                // Az 1. egér gombbal a nagyítandó terület kijelölését
+                // végezzük:
+                if(m.getButton() == java.awt.event.MouseEvent.BUTTON1 ) {
+                    // A nagyítandó kijelölt területet bal felsõ sarka: (x,y)
+                    // és szélessége (majd a vonszolás növeli)
+                    mx = 0;
+                    my = 0;
+                    repaint();
+                } else {
+                    // Nem az 1. egér gombbal az egérmutató mutatta c
+                    // komplex számból indított iterációkat vizsgálhatjuk
+                    MandelbrotIterációk iterációk =
+                            new MandelbrotIterációk(
+                            MandelbrotHalmazNagyító.this, 50);
+                    new Thread(iterációk).start();
+                }
             }
-            // Vonszolva kijelÃ¶lÃ¼nk egy terÃ¼letet...
-            // Ha felengedjÃ¼k, akkor a kijelÃ¶lt terÃ¼let
-            // ÃºjraszÃ¡mÃ­tÃ¡sa indul:
+            // Vonszolva kijelölünk egy területet...
+            // Ha felengedjük, akkor a kijelölt terület
+            // újraszámítása indul:
             public void mouseReleased(java.awt.event.MouseEvent m) {
-                double dx = (MandelbrotHalmazNagyÃ­tÃ³.this.b
-                        - MandelbrotHalmazNagyÃ­tÃ³.this.a)
-                        /MandelbrotHalmazNagyÃ­tÃ³.this.szÃ©lessÃ©g;
-                double dy = (MandelbrotHalmazNagyÃ­tÃ³.this.d
-                        - MandelbrotHalmazNagyÃ­tÃ³.this.c)
-                        /MandelbrotHalmazNagyÃ­tÃ³.this.magassÃ¡g;
-                // Az Ãºj Mandelbrot nagyÃ­tÃ³ objektum elkÃ©szÃ­tÃ©se:
-                new MandelbrotHalmazNagyÃ­tÃ³(MandelbrotHalmazNagyÃ­tÃ³.this.a+x*dx,
-                        MandelbrotHalmazNagyÃ­tÃ³.this.a+x*dx+mx*dx,
-                        MandelbrotHalmazNagyÃ­tÃ³.this.d-y*dy-my*dy,
-                        MandelbrotHalmazNagyÃ­tÃ³.this.d-y*dy,
-                        600,
-                        MandelbrotHalmazNagyÃ­tÃ³.this.iterÃ¡ciÃ³sHatÃ¡r);
+                if(m.getButton() == java.awt.event.MouseEvent.BUTTON1 ) {
+                    double dx = (MandelbrotHalmazNagyító.this.b
+                            - MandelbrotHalmazNagyító.this.a)
+                            /MandelbrotHalmazNagyító.this.szélesség;
+                    double dy = (MandelbrotHalmazNagyító.this.d
+                            - MandelbrotHalmazNagyító.this.c)
+                            /MandelbrotHalmazNagyító.this.magasság;
+                    // Az új Mandelbrot nagyító objektum elkészítése:
+                    new MandelbrotHalmazNagyító(
+                            MandelbrotHalmazNagyító.this.a+x*dx,
+                            MandelbrotHalmazNagyító.this.a+x*dx+mx*dx,
+                            MandelbrotHalmazNagyító.this.d-y*dy-my*dy,
+                            MandelbrotHalmazNagyító.this.d-y*dy,
+                            600,
+                            MandelbrotHalmazNagyító.this.iterációsHatár);
+                }
             }
         });
-        // EgÃ©r mozgÃ¡s esemÃ©nyek feldolgozÃ¡sa:
+        // Egér mozgás események feldolgozása:
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            // VonszolÃ¡ssal jelÃ¶ljÃ¼k ki a nÃ©gyzetet:
+            // Vonszolással jelöljük ki a négyzetet:
             public void mouseDragged(java.awt.event.MouseEvent m) {
-                // A nagyÃ­tandÃ³ kijelÃ¶lt terÃ¼let szÃ©lessÃ©ge Ã©s magassÃ¡ga:
+                // A nagyítandó kijelölt terület szélessége és magassága:
                 mx = m.getX() - x;
                 my = m.getY() - y;
                 repaint();
@@ -76,36 +93,36 @@ public class MandelbrotHalmazNagyÃ­tÃ³ extends MandelbrotHalmaz {
         });
     }
     /**
-     * PillanatfelvÃ©telek kÃ©szÃ­tÃ©se.
+     * Pillanatfelvételek készítése.
      */
-    public void pillanatfelvÃ©tel() {
-        // Az elmentendÅ‘ kÃ©p elkÃ©szÃ­tÃ©se:
-        java.awt.image.BufferedImage mentKÃ©p =
-                new java.awt.image.BufferedImage(szÃ©lessÃ©g, magassÃ¡g,
+    public void pillanatfelvétel() {
+        // Az elmentendõ kép elkészítése:
+        java.awt.image.BufferedImage mentKép =
+                new java.awt.image.BufferedImage(szélesség, magasság,
                 java.awt.image.BufferedImage.TYPE_INT_RGB);
-        java.awt.Graphics g = mentKÃ©p.getGraphics();
-        g.drawImage(kÃ©p, 0, 0, this);
-        g.setColor(java.awt.Color.BLUE);
+        java.awt.Graphics g = mentKép.getGraphics();
+        g.drawImage(kép, 0, 0, this);
+        g.setColor(java.awt.Color.BLACK);
         g.drawString("a=" + a, 10, 15);
         g.drawString("b=" + b, 10, 30);
         g.drawString("c=" + c, 10, 45);
         g.drawString("d=" + d, 10, 60);
-        g.drawString("n=" + iterÃ¡ciÃ³sHatÃ¡r, 10, 75);
-        if(szÃ¡mÃ­tÃ¡sFut) {
+        g.drawString("n=" + iterációsHatár, 10, 75);
+        if(számításFut) {
             g.setColor(java.awt.Color.RED);
             g.drawLine(0, sor, getWidth(), sor);
-        }         
+        }
         g.setColor(java.awt.Color.GREEN);
         g.drawRect(x, y, mx, my);
-        g.dispose();        
-        // A pillanatfelvÃ©tel kÃ©pfÃ¡jl nevÃ©nek kÃ©pzÃ©se:
+        g.dispose();
+        // A pillanatfelvétel képfájl nevének képzése:
         StringBuffer sb = new StringBuffer();
         sb = sb.delete(0, sb.length());
         sb.append("MandelbrotHalmazNagyitas_");
-        sb.append(++pillanatfelvÃ©telSzÃ¡mlÃ¡lÃ³);
+        sb.append(++pillanatfelvételSzámláló);
         sb.append("_");
-        // A fÃ¡jl nevÃ©be belevesszÃ¼k, hogy melyik tartomÃ¡nyban
-        // talÃ¡ltuk a halmazt:
+        // A fájl nevébe belevesszük, hogy melyik tartományban
+        // találtuk a halmazt:
         sb.append(a);
         sb.append("_");
         sb.append(b);
@@ -114,37 +131,51 @@ public class MandelbrotHalmazNagyÃ­tÃ³ extends MandelbrotHalmaz {
         sb.append("_");
         sb.append(d);
         sb.append(".png");
-        // png formÃ¡tumÃº kÃ©pet mentÃ¼nk
+        // png formátumú képet mentünk
         try {
-            javax.imageio.ImageIO.write(mentKÃ©p, "png",
+            javax.imageio.ImageIO.write(mentKép, "png",
                     new java.io.File(sb.toString()));
         } catch(java.io.IOException e) {
             e.printStackTrace();
         }
-    }    
+    }
     /**
-     * A nagyÃ­tandÃ³ kijelÃ¶lt terÃ¼letet jelzÅ‘ nÃ©gyzet kirajzolÃ¡sa.
+     * A nagyítandó kijelölt területet jelzõ négyzet kirajzolása.
      */
     public void paint(java.awt.Graphics g) {
-        // A Mandelbrot halmaz kirajzolÃ¡sa
-         g.drawImage(kÃ©p, 0, 0, this);
-        // Ha Ã©ppen fut a szÃ¡mÃ­tÃ¡s, akkor egy vÃ¶rÃ¶s
-        // vonallal jelÃ¶ljÃ¼k, hogy melyik sorban tart:         
-        if(szÃ¡mÃ­tÃ¡sFut) {
+        // A Mandelbrot halmaz kirajzolása
+        g.drawImage(kép, 0, 0, this);
+        // Ha éppen fut a számítás, akkor egy vörös
+        // vonallal jelöljük, hogy melyik sorban tart:
+        if(számításFut) {
             g.setColor(java.awt.Color.RED);
             g.drawLine(0, sor, getWidth(), sor);
-        }         
-        // A jelzÅ‘ nÃ©gyzet kirajzolÃ¡sa:
+        }
+        // A jelzõ négyzet kirajzolása:
         g.setColor(java.awt.Color.GREEN);
         g.drawRect(x, y, mx, my);
     }
     /**
-     * PÃ©ldÃ¡nyosÃ­t egy Mandelbrot halmazt nagyÃ­tÃ³ obektumot.
+     * Hol áll az egérmutató?
+     * @return int a kijelölt pont oszlop pozíciója.
+     */    
+    public int getX() {
+        return x;
+    }
+    /**
+     * Hol áll az egérmutató?
+     * @return int a kijelölt pont sor pozíciója.
+     */    
+    public int getY() {
+        return y;
+    }
+    /**
+     * Példányosít egy Mandelbrot halmazt nagyító obektumot.
      */
     public static void main(String[] args) {
-        // A kiindulÃ³ halmazt a komplex sÃ­k [-2.0, .7]x[-1.35, 1.35]
-        // tartomÃ¡nyÃ¡ban keressÃ¼k egy 600x600-as hÃ¡lÃ³val Ã©s az
-        // aktuÃ¡lis nagyÃ­tÃ¡si pontossÃ¡ggal:
-        new MandelbrotHalmazNagyÃ­tÃ³(-2.0, .7, -1.35, 1.35, 600, 255);
+        // A kiinduló halmazt a komplex sík [-2.0, .7]x[-1.35, 1.35]
+        // tartományában keressük egy 600x600-as hálóval és az
+        // aktuális nagyítási pontossággal:
+        new MandelbrotHalmazNagyító(-2.0, .7, -1.35, 1.35, 600, 255);
     }
-}
+}                    
