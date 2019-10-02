@@ -331,6 +331,7 @@ int main ( int argc, char **argv )
                     gyerek objektumára hivatkozik, meghívni gyermeke egy olyan metódusát amit o maga nem definiált. </para>
                 <para>A nem Osök által definiált metódusokhoz nem férhetünk hozzá, hacsak nem ˝ downcastoljuk az adott objektumot a tényleges típusára. 
                     Ez esetben viszont megsértjük az eloz˝ o feladatban ismertetett Liskov-elvet. </para>
+                <para>C++-ban:</para>
                 <programlisting>#include &lt;iostream>
 #include &lt;string>
 class Parent
@@ -364,6 +365,11 @@ class App
     }
 };
 </programlisting>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/szulo-gyerek-sert.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
                 <para>Javában:</para>
                 <programlisting>class Parent
 {
@@ -392,6 +398,11 @@ public class App
         }
 }
 </programlisting>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/szulo-gyerek-sert2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
             </sect1>
             <sect1>
                 <title>Hello, Android!</title>
