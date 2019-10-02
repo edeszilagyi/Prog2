@@ -4,19 +4,21 @@
 <book xmlns="http://docbook.org/ns/docbook"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="5.1">
     <info>
-        <title>Jegyzőkönyv</title>
+        <title>Jegyzökönyv</title>
         <author>
             <personname>Szilágyi-Czumbil Ede Balázs</personname>
-            
-            <personblurb><para>Neptun kód: CMY9W3</para></personblurb>
-            <personblurb><para>Git repó:<link>https://github.com/edeszilagyi/Prog2</link></para></personblurb>
-            <personblurb><para>e-mail: <email>ede.szilagyi@yahoo.com</email></para></personblurb>
-            
-            
         </author>
     </info>
     <part>
         <title/>
+        <chapter>
+            <title>Infók</title>
+            <para>Neptun kód: CMY9W3</para>
+            <para>
+                Git repó:<link>https://github.com/edeszilagyi/Prog2</link>
+            </para>
+            <para>e-mail: <email>ede.szilagyi@yahoo.com</email></para>
+        </chapter>
         <chapter>
             <title>0. hét - „Helló, Berners-Lee!</title>
             <sect1>
@@ -58,8 +60,7 @@
                     amely a nem visszaadottat tárolja és egy logikai tag, hogy van-e tárolt vagy futtatni kell az algot.) és az
                     OpenJDK, Oracle JDK-ban a Sun által adott OO szervezés ua.!
                     Segédlink: <link>https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_5.pdf</link> (16-22 fólia)</para>
-                <para>A feladat lényege, hogy készítsünk egy olyan Java programot, amely két normális eloszlású számot állít elo˝
-                    és hasonlítsuk össze a JDK fejleszto álltal készített polártranszformációs algoritmussal. </para>
+                
                 <para>A kód:</para>
                 <programlisting>public class PolarGenerator {
 
@@ -103,13 +104,18 @@
 	}
 }
 </programlisting>
+                <para>A program kezdésként két változót állít elő. Magát a tárolt számot(double) és
+                    egy boolean típusu változót ami tárolja hogy van-e változó.Ezután ellenőrzi hogy
+                    van e tárolt változó,ha van akkor generál 2 random számot amivel elvégzi az
+                    adott műveletet. Ezt addig folytatja amíg a kapott eredmény kisebb lesz 1nél .
+                    Ha a nincs tárolt változó false akkor visszaadja a tárolt változóban lévő
+                    értéket. </para>
                 <para>Miután futtatuk:</para>
                 <para><inlinemediaobject>
                     <imageobject>
                         <imagedata fileref="kepek/oomegold.jpg"/>
                     </imageobject>
                 </inlinemediaobject></para>
-                
             </sect1>
             <sect1>
                 <title>„Gagyi”:</title>
@@ -119,6 +125,20 @@
                     „mélyebb” választ, írj Java példaprogramot mely egyszer végtelen ciklus, más x,
                     t értékekkel meg nem! A példát építsd a JDK Integer.java forrására3 , hogy a
                     128-nál inkluzív objektum példányokat poolozza! </para>
+                <para>A JDK forrásán belül, a java/lang/Integer.java forrásban látszik hogy az
+                    Integer class-nak van egy alapértelmezett cache-je amiben vannak előre
+                    elkészített integer osztálybeli objektumok itt el vannak tárolva a -128tól 127ig
+                    terjedő számok hogy segítse a programok gyorsabb működését és jobb
+                    memóriahasználatát.<programlisting>public static Integer valueOf(int i) {
+if (i >= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
+return IntegerCache.cache[i + (-IntegerCache.low)];
+return new Integer(i);
+}</programlisting></para>
+                <para>E miatt ha a programunkban a [-128,127] intervallumon kívüli értéket adunk meg
+                    akkor az egyenlőség hamis lesz mivel két új obiektum fog létrejönni és emiatt
+                    végtelen ciklust kapunk.</para>
+                <para>Ha viszont az értékek az intervallumon belül van akkor igaz lesaz
+                    egyenlőség.</para>
                 <para>a program ami végtelen ciklust ad:</para>
                 <programlisting>public class Gagyi {
 
@@ -202,6 +222,12 @@
 	}
 }
 </programlisting>
+                <para>A Yoda condition olyan programozási stílus ahol a kifejezések fordított
+                    sorrendben vannak a tipikus,megszokott sorrendhez képest.</para>
+                <para>Az előző programrészlet pont ezt próbálja szemléltetni. amikor elősször
+                    próbáljuk ellenőrizni az egyenlőséget NullPointerEx-el leáll mivel megsértettük
+                    a Yoda condtition-t (null),de mikor megcseréltük a sorrendet már sikerrel
+                    jártunk (Success)</para>
                 <para>Lefuttatva:</para>
                 <para><inlinemediaobject>
                     <imageobject>
@@ -209,6 +235,94 @@
                     </imageobject>
                 </inlinemediaobject></para>
             </sect1>
+        </chapter>
+        <chapter>
+            <title>2. hét - „Helló, Liskov!”</title>
+            <sect1>
+                <title>Liskov helyettesítés sértése</title>
+                <para>Írjunk olyan OO, leforduló Java és C++ kódcsipetet, amely megsérti a Liskov elvet! Mutassunk rá a
+                    megoldásra: jobb OO tervezés.</para>
+                <para>C++ kódcsipet amelz megsérti a Liskov elvet: </para>
+                <programlisting>// ez a T az LSP-ben
+class Madar {
+public:
+     virtual void repul() {};
+};
+
+// ez a két osztály alkotja a "P programot" az LPS-ben
+class Program {
+public:
+     void fgv ( Madar &amp;madar ) {
+          madar.repul();
+     }
+};
+
+// itt jönnek az LSP-s S osztályok
+class Sas : public Madar
+{};
+
+class Pingvin : public Madar // ezt úgy is lehet/kell olvasni, hogy a pingvin tud repülni
+{};
+
+int main ( int argc, char **argv )
+{
+     Program program;
+     Madar madar;
+     program.fgv ( madar );
+
+     Sas sas;
+     program.fgv ( sas );
+
+     Pingvin pingvin;
+     program.fgv ( pingvin ); // sérül az LSP, mert a P::fgv röptetné a Pingvint, ami ugye lehetetlen.
+
+}</programlisting>
+                 <para>Így lenne helyes:</para>
+                <programlisting>// ez a T az LSP-ben
+class Madar {
+//public:
+//  void repul(){};
+};
+
+// ez a két osztály alkotja a "P programot" az LPS-ben
+class Program {
+public:
+     void fgv ( Madar &amp;madar ) {
+          // madar.repul(); a madár már nem tud repülni
+          // s hiába lesz a leszármazott típusoknak
+          // repül metódusa, azt a Madar&amp; madar-ra úgysem lehet hívni
+     }
+};
+
+// itt jönnek az LSP-s S osztályok
+class RepuloMadar : public Madar {
+public:
+     virtual void repul() {};
+};
+
+class Sas : public RepuloMadar
+{};
+
+class Pingvin : public Madar // ezt úgy is lehet/kell olvasni, hogy a pingvin tud repülni
+{};
+
+int main ( int argc, char **argv )
+{
+     Program program;
+     Madar madar;
+     program.fgv ( madar );
+
+     Sas sas;
+     program.fgv ( sas );
+
+     Pingvin pingvin;
+     program.fgv ( pingvin );
+
+}
+
+</programlisting>
+            </sect1>
+            
         </chapter>
     </part>
 </book>
