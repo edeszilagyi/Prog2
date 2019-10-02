@@ -322,6 +322,116 @@ int main ( int argc, char **argv )
 
 </programlisting>
             </sect1>
+            <sect1>
+                <title>Szülo-gyerek</title>
+                <para>Írjunk Szülő-gyerek Java és C++ osztálydefiníciót, amelyben demonstrálni tudjuk, hogy az ősön
+                    keresztül csak az ős üzenetei küldhetőek!
+                </para>
+                <para>Ez a feladat csupán azt demonstrálná, hogy nem lehetséges egy adott szülo referencián keresztül, ami egy ˝
+                    gyerek objektumára hivatkozik, meghívni gyermeke egy olyan metódusát amit o maga nem definiált. </para>
+                <para>A nem Osök által definiált metódusokhoz nem férhetünk hozzá, hacsak nem ˝ downcastoljuk az adott objektumot a tényleges típusára. 
+                    Ez esetben viszont megsértjük az eloz˝ o feladatban ismertetett Liskov-elvet. </para>
+                <programlisting>#include &lt;iostream>
+#include &lt;string>
+class Parent
+{
+public:
+    void saySomething()
+    {
+    std::cout &lt;&lt; "Parent says: BLA BLA BLA\n";
+    }
+};
+class Child : public Parent
+{
+public:
+    void echoSomething(std::string msg)
+    {
+    std::cout &lt;&lt; msg &lt;&lt; "\n";
+    }
+};
+class App
+{
+    int main()
+    {
+        Parent* p = new Parent();
+        Parent* p2 = new Child();
+        std::cout &lt;&lt; "Invoking method of parent\n";
+        p->saySomething();
+        std::cout &lt;&lt; "Invoking method of child through parent ref\n";
+        p2->echoSomething("This won’t work");
+        delete p;
+        delete p2;
+    }
+};
+</programlisting>
+                <para>Javában:</para>
+                <programlisting>class Parent
+{
+    public void saySomething()
+    {
+    System.out.println("Parent says: BLA BLA BLA");
+    }
+}
+class Child extends Parent
+{
+    public void echoSomething(String msg)
+    {
+    System.out.println(msg);
+    }
+}
+public class App
+{
+    public static void main(String[] args)
+    {
+        Parent p = new Parent();
+        Parent p2 = new Child();
+        System.out.println("Invoking method of parent");
+        p.saySomething();
+        System.out.println("Invoking method of child through parent ref");
+        p2.echoSomething("This won’t work");
+        }
+}
+</programlisting>
+            </sect1>
+            <sect1>
+                <title>Hello, Android!</title>
+                <para>Élesszük fel az SMNIST for Humans projektet!
+                    <link>https://gitlab.com/nbatfai/smnist/tree/master/forHumans/SMNISTforHumansExp3/app/src/main</link>
+                    Apró módosításokat eszközölj benne, pl. színvilág.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/SMINST.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para>Márcsak a színvilágot kell megváltoztatni a feladat szerint:
+                    Ezt megtehetjük a SMNISTSurfaceView.java állományban a megfelelo˝
+                    <itemizedlist>
+                        <listitem>
+                            <para>bgColor</para>
+                        </listitem>
+                        <listitem>
+                            <para>textPaint</para>
+                        </listitem>
+                        <listitem>
+                            <para>msgPaint</para>
+                        </listitem>
+                        <listitem>
+                            <para>dotPaint</para>
+                        </listitem>
+                        <listitem>
+                            <para>borderPaint</para>
+                        </listitem>
+                        <listitem>
+                            <para>fillPaint</para>
+                        </listitem>
+                    </itemizedlist>
+                    s a többi változók értékeinek megváltoztatásával.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/SMINST2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+            </sect1>
             
         </chapter>
     </part>
