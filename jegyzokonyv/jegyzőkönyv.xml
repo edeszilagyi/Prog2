@@ -445,5 +445,17 @@ public class App
             </sect1>
             
         </chapter>
+        <chapter>
+            <title>3. hét - „Helló, Mandelbrot!”</title>
+            <sect1>
+                <title>Reverse engineering UML osztálydiagram</title>
+                <para>UML osztálydiagram rajzolása az első védési C++ programhoz. Az osztálydiagramot a forrásokból
+                    generáljuk (pl. Argo UML, Umbrello, Eclipse UML) Mutassunk rá a kompozíció és aggregáció
+                    kapcsolatára a forráskódban és a diagramon, lásd még: <link>https://youtu.be/Td_nlERlEOs</link>.</para>
+                <para> <link>https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_6.pdf</link> (28-32 fólia)</para>
+                
+                
+            </sect1>
+        </chapter>
     </part>
 </book>
