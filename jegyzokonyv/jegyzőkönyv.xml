@@ -453,8 +453,49 @@ public class App
                     generáljuk (pl. Argo UML, Umbrello, Eclipse UML) Mutassunk rá a kompozíció és aggregáció
                     kapcsolatára a forráskódban és a diagramon, lásd még: <link>https://youtu.be/Td_nlERlEOs</link>.</para>
                 <para> <link>https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_6.pdf</link> (28-32 fólia)</para>
+                <para>A megoldás forrása:</para>
+                <para></para>
+                <para>A feladat megoldása során a Visual Paradigm programot használtam a kódból való uml diagram elkészítésére. Az uml diagrammok lényege hogy egy ábrában megmutassa egy adott program tervezetét. Ez kiválóan
+                    használható arra, hogy megtervezzünk egy programot, majd a diagramm alapján elkészítsük annak kódbéli
+                    verzióját. Ezt lehet úgy is hogy a terv alapján kézzel megírjuk a kódot vagy az ábra alapján le is lehet
+                    generálni a kódot. D</para>
+                <para>Ebben a feladatban az LZWBinfa kódból lett elkészítve a diagramm. A diagrammon látható hogy milyen
+                    osztályokból épül fel a program és azok között milyen kapcsolat van. Továbbá látható az is hogy az osztályok milyen változókkal és metódusokkal rendelkeznek. Mint látható egy osztály két részre van osztva a
+                    diagrammon. A felso részben található a változók listája, az alsó részben pedig a metódusok listája. To- ˝
+                    vábbá minden változó és metódus elott látható egy +, - vagy # jel. Ez jelöli azt hogy a hozzáférhet ˝ osége az ˝
+                    milyen. A + jelenti a public-ot, a - a private-ot, a # pedig a protected jelzot jelenti.</para>
                 
-                
+            </sect1>
+            <sect1>
+                <title>Forward engineering UML osztálydiagram</title>
+                <para>UML-ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
+                <para>Ebben a feladatban egy UML diagrammból kell kódot készíteni. Az UML diagrammot a Visual Paradigm
+                    programmal készítjük el majd utána kódot generálunk belole. Els ˝ onek el kell készíteni az osztályokat és ˝
+                    belehelyezni a kívánt változókat és metódusokat. Ha ez megvan akkor be kell jelölni a közöttük lévo˝
+                    kapcsolatokat. Ez után már nincs más dolgunk mint elvégezni a kód generálást.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/UML.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+            </sect1>
+            <sect1>
+                <title>BPMN</title>
+                <para>Rajzoljunk le egy tevékenységet BPMN-ben!</para>
+                <para><link>https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_7.pdf</link> (34-47 fólia)</para>
+                <para>A BPMN - teljes nevén Business Process Model and Notation - egy olyan fajta modellézt takar ami kiválóan
+                    alkalmas arra hogy egy folyamat lépéseit szemléltessünk benne. Be lehet vele mutatni hogy egy adott
+                    folyamat során milyen lépési lehetoségek vannak és hogy hová vezethetnek. Kiválóan alkalmas folyamatok ˝
+                    megtervezésére és arra hogy a folyamatok minden irányú kimenetelét szemléltessük.</para>
+                <para>Megoldás:</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para>Jelen ábrán egy prog1 labor folyamata látható. A kezdo állapotot a vékony kör jelöli. ˝
+                    Ezután a folyamat lépéset a téglalapok jelölik a nyilak pedig a folyamat irányát. A rombusz az elágazásokat jelenti ahonnan a kimeneteltol függően halad tovább a folyamat. A végén pedig a vastag kör a
+                    végállapotot jelenti ahol a folyamat végetér.</para>
             </sect1>
         </chapter>
     </part>
