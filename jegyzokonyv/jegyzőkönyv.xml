@@ -53,6 +53,8 @@
         </chapter>
         <chapter>
             <title>1. hét - „Helló, Arroway!”</title>
+            <subtitle>1. hét Az objektumorientált paradigma alapfoglamai. Osztály,
+                objektum, példányosítás.</subtitle>
             <sect1>
                 <title>OO szemlélet</title>
                 <para>A módosított polártranszformációs normális generátor beprogramozása Java nyelven. Mutassunk rá, hogy
@@ -238,6 +240,9 @@ return new Integer(i);
         </chapter>
         <chapter>
             <title>2. hét - „Helló, Liskov!”</title>
+            <subtitle>2. hét Öröklődés, osztályhierarchia. Polimorfizmus,
+                metódustúlterhelés. Hatáskörkezelés. A bezárási eszközrendszer,
+                láthatósági szintek. Absztrakt osztályok és interfészek.</subtitle>
             <sect1>
                 <title>Liskov helyettesítés sértése</title>
                 <para>Írjunk olyan OO, leforduló Java és C++ kódcsipetet, amely megsérti a Liskov elvet! Mutassunk rá a
@@ -447,6 +452,8 @@ public class App
         </chapter>
         <chapter>
             <title>3. hét - „Helló, Mandelbrot!”</title>
+            <subtitle>3. hét Modellező eszközök és nyelvek. AZ UML és az UML
+                osztálydiagramja.</subtitle>
             <sect1>
                 <title>Reverse engineering UML osztálydiagram</title>
                 <para>UML osztálydiagram rajzolása az első védési C++ programhoz. Az osztálydiagramot a forrásokból
@@ -500,6 +507,408 @@ public class App
                 <para>Jelen ábrán egy prog1 labor folyamata látható. A kezdo állapotot a vékony kör jelöli. ˝
                     Ezután a folyamat lépéset a téglalapok jelölik a nyilak pedig a folyamat irányát. A rombusz az elágazásokat jelenti ahonnan a kimeneteltol függően halad tovább a folyamat. A végén pedig a vastag kör a
                     végállapotot jelenti ahol a folyamat végetér.</para>
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>4. hét - „Helló, Chomsky!”</title>
+            <subtitle>4. hét Objektumorientált programozási nyelvek programnyelvi
+                elemei: karakterkészlet, lexikális egységek, kifejezések, utasítások.</subtitle>
+            <sect1>
+                <title>Encoding</title>
+                <para>Fordítsuk le és futtassuk a Javat tanítok könyv MandelbrotHalmazNagyító.java forrását úgy, hogy a
+                    fájl nevekben és a forrásokban is meghagyjuk az ékezetes betűket!</para>
+                    <para><link>https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/adatok.html</link></para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>l334d1c4</title>
+                <para>Írj olyan OO Java vagy C++ osztályt, amely leet cipherként működik, azaz megvalósítja ezt a betű
+                    helyettesítést: <link>https://simple.wikipedia.org/wiki/Leet</link> (Ha ez első részben nem tetted meg, akkor írasd
+                    ki és magyarázd meg a használt struktúratömb memóriafoglalását!)</para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>Fullscreen</title>
+                <para>Készítsünk egy teljes képernyős Java programot!</para>
+                <para>Tipp:<link>https://www.tankonyvtar.hu/en/tartalom/tkt/javat-tanitok-javat/ch03.html#labirintus_jatek</link></para>
+                <para></para>
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>5. hét - „Helló, Stroustrup!”</title>
+            <subtitle>5. hét Objektumorientált programozási nyelvek típusrendszere (pl.:
+                Java, C#) és 6. hét Típusok tagjai: mezők, (nevesített) konstansok,
+                tulajdonságok, metódusok, események, operátorok, indexelők,
+                konstruktorok, destruktorok, beágyazott típusok.Összevonva.</subtitle>
+            <sect1>
+                <title>Másoló-mozgató szemantika</title>
+                <para>Kódcsipeteken (copy és move ctor és assign) keresztül vesd össze a C++11 másoló és a mozgató
+                    szemantikáját, a mozgató konstruktort alapozd a mozgató értékadásra!</para>
+                <para>A kód:</para>
+                <programlisting>#include &lt;iostream>
+
+
+class IntClass 
+{
+public:
+	int ertek;
+
+	IntClass () //parameter nelkuli alap
+	{
+		ertek = 0;
+		std::cout &lt;&lt; "Paraméter nélküli konstruktor.."	&lt;&lt; std::endl;
+	}
+
+	IntClass (int x)//parameteres 
+	{
+		ertek = x;
+		std::cout &lt;&lt; "Paraméteres konstruktor.." &lt;&lt; std::endl;	
+	}
+
+	void operator= (const IntClass &amp;t) //egyenlőség
+	{
+		this->ertek = t.ertek;
+		std::cout &lt;&lt; "Egyenlőség operátor (osztály) túlterhelés.." &lt;&lt; std::endl;
+	}
+
+	void operator= (int t)
+	{
+		this->ertek = t;
+		std::cout &lt;&lt; "Egyenlőség operátor (int) túlterhelés.." &lt;&lt; std::endl;
+	}
+				
+	IntClass operator+ (const IntClass &amp;t) //összeadás
+	{
+		IntClass x;
+		x.ertek = this->ertek + t.ertek;
+		std::cout &lt;&lt; "Összeadas operátor túlterhelés.." &lt;&lt; std::endl;
+		return x;
+	}
+
+	IntClass operator- (const IntClass &amp;t) //kivonás
+	{
+		IntClass x;
+		x.ertek = this->ertek - t.ertek;
+		std::cout &lt;&lt; "Kivonás operátor túlterhelés.." &lt;&lt; std::endl;
+		return x;
+	}
+
+	IntClass operator* (const IntClass &amp;t) //szorzás
+	{
+		IntClass x;
+		x.ertek = this->ertek * t.ertek;
+		std::cout &lt;&lt; "Szorzás operátor túlterheles.." &lt;&lt; std::endl;
+		return x;
+	}
+
+	IntClass operator/ (const IntClass &amp;t) //osztás
+	{
+		IntClass x;
+		x.ertek = this->ertek / t.ertek;
+		std::cout &lt;&lt; "Osztás operátor túlterheles.." &lt;&lt; std::endl;
+		return x;
+	}
+
+	void operator+= (const IntClass &amp;t) //hozzáad
+	{
+		this->ertek += t.ertek;
+		std::cout &lt;&lt; "+= operátor túlterheles.." &lt;&lt; std::endl;
+	}
+	
+	void operator-= (const IntClass &amp;t) //kivon
+	{
+		this->ertek -= t.ertek;
+		std::cout &lt;&lt; "-= operátor túlterheles.." &lt;&lt; std::endl;
+	}
+
+	void operator++ (int) //növel
+	{
+		ertek++;
+		std::cout &lt;&lt; "++ operátor túlterheles.." &lt;&lt; std::endl;
+	}
+
+	void operator-- (int) //csökkent
+	{
+		ertek--;
+		std::cout &lt;&lt; "-- operátor túlterheles.." &lt;&lt; std::endl;
+	}
+
+	~IntClass()
+	{
+		std::cout &lt;&lt; "Destruktor.." &lt;&lt; std::endl;
+	}
+
+};
+
+int 
+main()
+{
+	IntClass x, y, z = 5;
+	x = 10;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x = y;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x = y + z;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x = y - z;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x = y * z;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x = y / z;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x += z;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x -= z;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x++;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	x--;
+	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
+
+	return 0;
+}
+	</programlisting>
+                <para>Lefuttatva:</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/move-copy%20ctor.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+            </sect1>
+            <sect1>
+                <title>Változó argumentumszámú ctor</title>
+                <para>Készítsünk olyan példát, amely egy képet tesz az alábbi projekt Perceptron osztályának bemenetére
+                    és a Perceptron ne egy értéket, hanem egy ugyanakkora méretű „képet” adjon vissza. (Lásd még a 4
+                    hét/Perceptron osztály feladatot is.)</para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>Összefoglaló</title>
+                <para>Az előző 4 feladat egyikéről írj egy 1 oldalas bemutató „”esszé szöveget!</para>
+                
+                    <para><emphasis role="underline">Másoló-mozgató
+                            szemantika</emphasis></para><orderedlist>
+                            <listitem>
+                                <para><emphasis role="underline"><emphasis role="bold">Másoló
+                                            szemantika</emphasis></emphasis><emphasis
+                                        role="underline">:</emphasis></para>
+                            </listitem>
+                        </orderedlist><para> Ha van az osztályban dinamikus adattag, akkor
+                            alapértelmezésben tiltjuk , míg privátban deklaráljuk a másoló
+                            konstruktort és másoló értékadást.Különben alkalmazzuk a “Rule of three”
+                            szabályt.</para><para>A Rule of three szabály kimondja, hogy ha
+                            dinamikus tagot aggregáló osztályban kell implementálni:</para><itemizedlist>
+                            <listitem>
+                                <para>Destruktort,</para>
+                            </listitem>
+                            <listitem>
+                                <para>Másoló konstruktort,</para>
+                            </listitem>
+                            <listitem>
+                                <para>Vagy másoló értékadást</para>
+                            </listitem>
+                        </itemizedlist><para>Akkor nagy valószínűséggel mindhármat implementálni
+                            kell.</para><para>Példa Rule of three-re:</para>
+                <programlisting>Int(const Int&amp;);
+Int(Int&amp;&amp;); //Rule of 5
+Int&amp; operator=(const Int&amp;);
+Int&amp; operator=(Int&amp;&amp;);
+~Int();</programlisting>
+                <para>
+                    2.<emphasis role="underline"><emphasis role="bold">Mozgató szemantika:</emphasis></emphasis></para>
+                <para> C++11-be bekerűlt a mozgató konstruktor, amely alkamazása drasztikusan
+                       hatékonyabbá tette a kódokat. A mozgató konstruktor legfontosabb
+                       tulajdonsága, hogy a használatával elkerülhető a memória újraelosztása
+                       és ugyanannyi memóriát használ mint amennyit az eredeti objektum
+                       használt, aminek ideiglenes funkciója van, mivel miután átadta az
+                       értéket az új objektumnak törlésre kerül. Ahhoz, hogy alkalmazni tudjuk
+                       a mozgató szemantikát, először meg kell oldanunk azt a problémát, hogy
+                       az eredeti objektumot hibamentesen töröljük.
+                </para>
+                <para> Példa:</para>
+                <programlisting>#include&lt;bits/stdc++.h> 
+int main() 
+{ 
+	std :: vector &lt;int> vec1 {1, 2, 3, 4, 5}; 
+	std :: vector &lt;int> vec2 {6, 6, 6, 6, 6}; 
+
+	
+	std :: cout &lt;&lt; "1.vektor elemei :"; 
+	for(int i = 0; i &lt; vec1.size(); i++) 
+		std :: cout &lt;&lt; " " &lt;&lt; vec1[i]; 
+	std :: cout &lt;&lt; "\n"; 
+	
+	std :: cout &lt;&lt; "2.vektor elemei :"; 
+	for(unsigned int i = 0; i &lt; vec2.size(); i++) 
+		std :: cout &lt;&lt; " " &lt;&lt; vec2[i]; 
+	std :: cout &lt;&lt; "\n\n"; 
+	
+	// elso 3 elemet az 1.vektorbol move-olja a 2.vektor 1.elemetol 
+	std :: move (vec1.begin(), vec1.begin() + 3, vec2.begin()); 
+	
+	std :: cout &lt;&lt; "2.vektor elemei std::move utan:"; 
+	for(unsigned int i = 0; i &lt; vec2.size(); i++) 
+		std :: cout &lt;&lt; " " &lt;&lt; vec2[i]; 
+	std :: cout &lt;&lt; "\n"; 
+
+
+
+	return 0; 
+} </programlisting>
+             <para>Lefuttatva:</para>
+             <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/asd.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+             <para>
+                    <table frame="all">
+                        <title>Copy ctor vs Move ctor</title>
+                        <tgroup cols="2">
+                            <colspec colnum="1" colwidth="1*" colname="Másoló konstruktor"/>
+                            <colspec colname="Mozgató konstruktor" colnum="2" colwidth="1*"/>
+                            <thead>
+                                <row>
+                                    <entry>
+                                        <para>Másoló konstruktor</para>
+                                    </entry>
+                                    <entry>
+                                        <para>Mozgató konstruktor</para>
+                                    </entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <para>Az argumentum referenciaként a bal oldali értéket
+                                            kapja.</para>
+                                    </entry>
+                                    <entry>
+                                        <para>Az argumentum referenciaként a jobb oldali értéket
+                                            kapja.</para>
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <para>Új objektumot hoz létre a kapott objektumból az által,
+                                            hogy lemásolja az összes értékét egy új memória
+                                            címre.</para>
+                                    </entry>
+                                    <entry>
+                                        <para>Új objektumot hoz létre, de ugyanannyi memóriát
+                                            használ mint az átadott objektum.</para>
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <para>Nem hatékony, mivel sok memória elosztást használ
+                                            működése során az új objektumok létrehozására.A mozgató
+                                            konstruktor használata sokkal hatékonyabb.</para>
+                                    </entry>
+                                    <entry>
+                                        <para>Memóriahasználatának nagy részét a kapott objektum
+                                            teszi ki, ezért hatékonyabb, mint a másoló
+                                            konstruktor.</para>
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <para>Nem változtat semmit a kapott objektumon, ezért a
+                                            kapott objektum használható másoló operátor után
+                                            is.</para>
+                                    </entry>
+                                    <entry>
+                                        <para>Mivel a mozgató konstruktor a kapott objektum memória
+                                            blokkjait használja, ezért a kapott objektum nem
+                                            használható mozgató operátor után.</para>
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </para>
+               
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>6. hét - „Helló, Gödel!”</title>
+            <subtitle>7. hét Interfészek. Kollekciók. és 8. hét Funkcionális nyelvi
+                elemek. Lambda kifejezések.Összevonva.</subtitle>
+            <sect1>
+                <title>STL map érték szerinti rendezése</title>
+                <para>Például:<link>https://github.com/nbatfai/future/blob/master/cs/F9F2/fenykard.cpp#L180</link></para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>Alternatív Tabella rendezése</title>
+                <para>Mutassuk be a
+                        <link>https://progpater.blog.hu/2011/03/11/alternativ_tabella</link> a
+                    programban a java.lang Interface Comparable&lt;T> szerepét!</para>
+                <para></para>
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>7. hét - „Helló, !”</title>
+            <subtitle>9. hét Adatfolyamok kezelése, streamek és 11. hét I/O,
+                állománykezelés. Szerializáció.</subtitle>
+            <sect1>
+                <title>FUTURE tevékenység editor</title>
+                <para>Javítsunk valamit a ActivityEditor.java JavaFX programon!</para>
+                <para><link>https://github.com/nbatfai/future/tree/master/cs/F6</link></para>
+                <para>Itt láthatjuk működésben az alapot: <link>https://www.twitch.tv/videos/222879467</link></para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>OOCWC Boost ASIO hálózatkezelése</title>
+                <para>Mutassunk rá a scanf szerepére és használatára! <link>https://github.com/nbatfai/robocaremulator/blob/master/justine/rcemu/src/carlexer.ll</link></para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>BrainB</title>
+                <para>Mutassuk be a Qt slot-signal mechanizmust ebben a projektben: <link>https://github.com/nbatfai/esporttalent-search</link></para>
+                <para></para>
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>8. hét - „Helló, Schwarzenegger!”</title>
+            <subtitle>10. hét Kivételkezelés. és 12. hét Reflexió. A fordítást és a
+                kódgenerálást támogató nyelvi elemek (annotációk, attribútumok). Összevonva.</subtitle>
+            <sect1>
+                <title>Port scan</title>
+                <para>Mutassunk rá ebben a port szkennelő forrásban a kivételkezelés szerepére!</para>
+                <para><link>https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#id527287</link></para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>Android Játék</title>
+                <para>Írjunk egy egyszerű Androidos „játékot”! Építkezzünk például a 2. hét „Helló, Android!” feladatára!</para>
+                <para></para>
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>9. hét - „Helló, Calvin!”</title>
+            <subtitle>13. hét Multiparadigmás nyelvek és 14. hét Programozás
+                multiparadigmás nyelveken. Összevonva.</subtitle>
+            <sect1>
+                <title>MNIST</title>
+                <para>Az alap feladat megoldása, +saját kézzel rajzolt képet is ismerjen fel,</para>
+                <para><link>https://progpater.blog.hu/2016/11/13/hello_samu_a_tensorflow</link>-bol Háttérként ezt vetítsük le:</para>
+                <para><link>https://prezi.com/0u8ncvvoabcr/no-programming-programming/</link></para>
+                <para></para>
+            </sect1>
+            <sect1>
+                <title>Android telefonra a TF objektum detektálója</title>
+                <para>Telepítsük fel, próbáljuk ki!</para>
+                <para></para>
             </sect1>
         </chapter>
     </part>
