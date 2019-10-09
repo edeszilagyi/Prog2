@@ -454,7 +454,11 @@ public class App
                     kapcsolatára a forráskódban és a diagramon, lásd még: <link>https://youtu.be/Td_nlERlEOs</link>.</para>
                 <para> <link>https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_6.pdf</link> (28-32 fólia)</para>
                 <para>A megoldás forrása:</para>
-                <para></para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/reverse%20engineering%20uml.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
                 <para>A feladat megoldása során a Visual Paradigm programot használtam a kódból való uml diagram elkészítésére. Az uml diagrammok lényege hogy egy ábrában megmutassa egy adott program tervezetét. Ez kiválóan
                     használható arra, hogy megtervezzünk egy programot, majd a diagramm alapján elkészítsük annak kódbéli
                     verzióját. Ezt lehet úgy is hogy a terv alapján kézzel megírjuk a kódot vagy az ábra alapján le is lehet
