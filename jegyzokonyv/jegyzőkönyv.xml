@@ -500,7 +500,7 @@ public class App
                 <para>Megoldás:</para>
                 <para><inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="kepek/1.png"/>
+                            <imagedata fileref="kepek/2.png"/>
                         </imageobject>
                     </inlinemediaobject></para>
                 <para>Jelen ábrán egy prog1 labor folyamata látható. A kezdo állapotot a vékony kör jelöli. ˝
@@ -524,7 +524,7 @@ public class App
                     MandelbrotHalmazNagyító.java.</para>
                 <para><inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="kepek/encoding1.png"/>
+                            <imagedata fileref="kepek/encoding1-2.png"/>
                         </imageobject>
                     </inlinemediaobject></para>
                 <para>Az encoding kulcsszó segítségével adjuk meg karakterkódolást amely
@@ -595,7 +595,7 @@ public class leetCipher
                 <para>Lefuttatva:</para>
                 <para><inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="kepek/Leet.png"/>
+                            <imagedata fileref="kepek/Leet2.png"/>
                         </imageobject>
                     </inlinemediaobject></para>
             </sect1>
@@ -622,7 +622,7 @@ public class leetCipher
                 <para>Íme a lefutott teljesképernyős program:</para>
                 <para><inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="kepek/fullscreen.png"/>
+                            <imagedata fileref="kepek/fullscreen2.png"/>
                         </imageobject>
                     </inlinemediaobject></para>
             </sect1>
