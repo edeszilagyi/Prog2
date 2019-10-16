@@ -520,12 +520,22 @@ public class App
                 <para>A feladat során a MandelbrotHalmazNagyító.java fájlt kellett fordítani de úgy
                     hogy az ékezetes karakterekkel együtt is forduljon. Ez úgy kivitelezheto ha a
                     program fordítása során beadunk egy encoding kapcsolót a  parancssori
-                    paraméterek közzé: javac -encoding "ISO-8859-1" MandelbrotIterációk.java
+                    paraméterek közzé: javac -encoding "ISO-8859-2" MandelbrotIterációk.java
                     MandelbrotHalmazNagyító.java.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/encoding1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
                 <para>Az encoding kulcsszó segítségével adjuk meg karakterkódolást amely
                     segítségével értelmezni akarjuk a kódot. Jelen helyzetben ez a karakterkészlet
-                    az ISO-8859-1. Ez egy szabvány amely tartalmazza az ékezetes karaktereket és így
-                    ennek segítségével már m ˝uködni fog a program.</para>
+                    az ISO-8859-2. Ez egy szabvány amely tartalmazza az ékezetes karaktereket és így
+                    ennek segítségével már működni fog a program.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/encoding2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
             </sect1>
             <sect1>
                 <title>l334d1c4</title>
