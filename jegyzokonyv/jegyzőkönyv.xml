@@ -637,149 +637,24 @@ public class leetCipher
                 <title>JDK osztályok</title>
                 <para>Írjunk olyan Boost C++ programot (indulj ki például a fénykardból) amely kilistázza a JDK összes
                     osztályát (miután kicsomagoltuk az src.zip állományt, arra ráengedve)!</para>
-                <para></para>
-            </sect1>
-            <sect1>
-                <title>Másoló-mozgató szemantika</title>
-                <para>Kódcsipeteken (copy és move ctor és assign) keresztül vesd össze a C++11 másoló és a mozgató
-                    szemantikáját, a mozgató konstruktort alapozd a mozgató értékadásra!</para>
-                <para>A kód:</para>
-                <programlisting>#include &lt;iostream>
-
-
-class IntClass 
-{
-public:
-	int ertek;
-
-	IntClass () //parameter nelkuli alap
-	{
-		ertek = 0;
-		std::cout &lt;&lt; "Paraméter nélküli konstruktor.."	&lt;&lt; std::endl;
-	}
-
-	IntClass (int x)//parameteres 
-	{
-		ertek = x;
-		std::cout &lt;&lt; "Paraméteres konstruktor.." &lt;&lt; std::endl;	
-	}
-
-	void operator= (const IntClass &amp;t) //egyenlőség
-	{
-		this->ertek = t.ertek;
-		std::cout &lt;&lt; "Egyenlőség operátor (osztály) túlterhelés.." &lt;&lt; std::endl;
-	}
-
-	void operator= (int t)
-	{
-		this->ertek = t;
-		std::cout &lt;&lt; "Egyenlőség operátor (int) túlterhelés.." &lt;&lt; std::endl;
-	}
-				
-	IntClass operator+ (const IntClass &amp;t) //összeadás
-	{
-		IntClass x;
-		x.ertek = this->ertek + t.ertek;
-		std::cout &lt;&lt; "Összeadas operátor túlterhelés.." &lt;&lt; std::endl;
-		return x;
-	}
-
-	IntClass operator- (const IntClass &amp;t) //kivonás
-	{
-		IntClass x;
-		x.ertek = this->ertek - t.ertek;
-		std::cout &lt;&lt; "Kivonás operátor túlterhelés.." &lt;&lt; std::endl;
-		return x;
-	}
-
-	IntClass operator* (const IntClass &amp;t) //szorzás
-	{
-		IntClass x;
-		x.ertek = this->ertek * t.ertek;
-		std::cout &lt;&lt; "Szorzás operátor túlterheles.." &lt;&lt; std::endl;
-		return x;
-	}
-
-	IntClass operator/ (const IntClass &amp;t) //osztás
-	{
-		IntClass x;
-		x.ertek = this->ertek / t.ertek;
-		std::cout &lt;&lt; "Osztás operátor túlterheles.." &lt;&lt; std::endl;
-		return x;
-	}
-
-	void operator+= (const IntClass &amp;t) //hozzáad
-	{
-		this->ertek += t.ertek;
-		std::cout &lt;&lt; "+= operátor túlterheles.." &lt;&lt; std::endl;
-	}
-	
-	void operator-= (const IntClass &amp;t) //kivon
-	{
-		this->ertek -= t.ertek;
-		std::cout &lt;&lt; "-= operátor túlterheles.." &lt;&lt; std::endl;
-	}
-
-	void operator++ (int) //növel
-	{
-		ertek++;
-		std::cout &lt;&lt; "++ operátor túlterheles.." &lt;&lt; std::endl;
-	}
-
-	void operator-- (int) //csökkent
-	{
-		ertek--;
-		std::cout &lt;&lt; "-- operátor túlterheles.." &lt;&lt; std::endl;
-	}
-
-	~IntClass()
-	{
-		std::cout &lt;&lt; "Destruktor.." &lt;&lt; std::endl;
-	}
-
-};
-
-int 
-main()
-{
-	IntClass x, y, z = 5;
-	x = 10;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x = y;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x = y + z;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x = y - z;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x = y * z;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x = y / z;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x += z;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x -= z;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x++;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	x--;
-	std::cout &lt;&lt; x.ertek &lt;&lt; std::endl;
-
-	return 0;
-}
-	</programlisting>
-                <para>Lefuttatva:</para>
+                <para>Források:<link>https://github.com/edeszilagyi/Prog2/tree/master/5.het/JDK%20oszt%C3%A1lyok</link></para>
+                <para>A JDK program elkészítéséhez mintául szolgálhat a fenykard.cpp fájl, melynek
+                    függvénye a fájlok kereséséért és listázásáért felelos. A boost.cpp-vel tehát a
+                    JDK-ban található src.zip-ben lévő java állományokat fogjuk kilistázni a
+                    könyvtárszerkezet kicsomagolása után, majd ezek alapján kiiratjuk a JDK
+                    osztályok számát. A Boost könyvtár segítségével rekurzívan megyünk végig a
+                    könyvtárszerkezeten, így a java fájlokban lévő osztályok kigyűjtése felgyorsul
+                    és leegyszerűsödik. Ha az src.zip tartalmát kicsomagoltuk, akkor következhet a
+                    .cpp fordítása. Ezután ha argumentumként megadjuk az src mappát utána
+                    futtatáskor megkapjuk a JDK osztályok számát. A kódok futatása:</para>
                 <para><inlinemediaobject>
                         <imageobject>
-                            <imagedata fileref="kepek/move-copy%20ctor.png"/>
+                            <imagedata fileref="kepek/jdk1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/jdk2.png"/>
                         </imageobject>
                     </inlinemediaobject></para>
             </sect1>
@@ -788,7 +663,9 @@ main()
                 <para>Készítsünk olyan példát, amely egy képet tesz az alábbi projekt Perceptron osztályának bemenetére
                     és a Perceptron ne egy értéket, hanem egy ugyanakkora méretű „képet” adjon vissza. (Lásd még a 4
                     hét/Perceptron osztály feladatot is.)</para>
-                <para>A megoldás forrása:<link>https://github.com/edeszilagyi/Prog2/tree/master/5.het/V%C3%A1ltoz%C3%B3%20argumentumsz%C3%A1m%C3%BA%20ctor</link></para>
+                <para>A megoldás forrása:<link
+                        xlink:href="https://github.com/edeszilagyi/Prog2/tree/master/5.het/Változó%20argumentumszámú%20ctor"
+                    /></para>
                 <para>A kétdimenyiós halmaz png ábráját fogjuk eloször létrehozni a mandel.cpp file
                     segítségével. hogy látjuk, a mandel.cpp sikeres fordításához és futtatásához
                     szükségünk lesz a libpng, libpng++ könyvtárakra és a png++/png.hpp fájlra.A
