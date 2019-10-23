@@ -634,6 +634,12 @@ public class leetCipher
                 tulajdonságok, metódusok, események, operátorok, indexelők,
                 konstruktorok, destruktorok, beágyazott típusok.Összevonva.</subtitle>
             <sect1>
+                <title>JDK osztályok</title>
+                <para>Írjunk olyan Boost C++ programot (indulj ki például a fénykardból) amely kilistázza a JDK összes
+                    osztályát (miután kicsomagoltuk az src.zip állományt, arra ráengedve)!</para>
+                <para></para>
+            </sect1>
+            <sect1>
                 <title>Másoló-mozgató szemantika</title>
                 <para>Kódcsipeteken (copy és move ctor és assign) keresztül vesd össze a C++11 másoló és a mozgató
                     szemantikáját, a mozgató konstruktort alapozd a mozgató értékadásra!</para>
@@ -782,7 +788,42 @@ main()
                 <para>Készítsünk olyan példát, amely egy képet tesz az alábbi projekt Perceptron osztályának bemenetére
                     és a Perceptron ne egy értéket, hanem egy ugyanakkora méretű „képet” adjon vissza. (Lásd még a 4
                     hét/Perceptron osztály feladatot is.)</para>
-                <para/>
+                <para>A megoldás forrása:<link>https://github.com/edeszilagyi/Prog2/tree/master/5.het/V%C3%A1ltoz%C3%B3%20argumentumsz%C3%A1m%C3%BA%20ctor</link></para>
+                <para>A kétdimenyiós halmaz png ábráját fogjuk eloször létrehozni a mandel.cpp file
+                    segítségével. hogy látjuk, a mandel.cpp sikeres fordításához és futtatásához
+                    szükségünk lesz a libpng, libpng++ könyvtárakra és a png++/png.hpp fájlra.A
+                    könyvtárakat a sudo parancs segítségével tudjuk telepíteni, viszont a headerhez
+                    le kell töltenünk a png++ hivatalos oldaláról a becsomagolt telepíto
+                        állományokat:<link
+                        xlink:href="http://download.savannah.nongnu.org/releases/pngpp/png++-0.2.9.tar.gz"
+                    /><programlisting>//A terminálba leadott parancsok:
+$ sudo apt-get install libpng-dev
+$ sudo apt-get install libpng++-dev
+$ tar -zxf png++-0.2.9.tar.gz
+$ cd ./png++-0.2.9
+$ make</programlisting></para>
+                <para>Ezután lehet fordítani és futtatni a programot:</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/valtarg1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para>A perceptron az egyik legegyszerűbb előrecsatolt neurális hálózat. A main.cpp
+                    segítségével fogjuk szimulálni a hiba-visszaterjesztéses módszert, mely a
+                    többrétegű perceptronok egyik legfőbb tanítási módszere. Ahhoz, hogy ezt
+                    fordítani és futtatni tudjuk később, szükségünk lesz az mlp.hpp fájlra, mely már
+                    tartalmazza a Perceptron osztályt. Az eloző program futtatásával létrejött
+                    Mandelbrot png ábrát fogjuk beimportálni. A fájloknak köszönhetően megadhatjuk a
+                    neuronok darabszámát. A mandel.png alapján új képet állítunk elő. A visszakapott
+                    értékeket megfeleltetjük a blue értékeknek. A 4.heti Perceptron feladatához
+                    képest módosításokat kell végeznünk a header file-on is, ugyanis új képet
+                    akarunk eloállítani. Az operátor már egy tömböt térít vissza, melynek
+                    segítségével bele tudunk nyúlni a képbe.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/valtarg2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
             </sect1>
             <sect1>
                 <title>Összefoglaló</title>
