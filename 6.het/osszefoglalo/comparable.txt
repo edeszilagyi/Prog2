@@ -1,9 +1,0 @@
-Comparable<T> interface
-
-Javaban a comparable interface az egyik leggyakrabban hasznalt inteface.
-Ahhoz, hogy hasznalni tudjuk a comparable interface compareTo metodusat implementalnunk kell a classban a comparable interfacet.
-Ha az elso objektum nagyobb mint a masodik objektum, akkor visszateritesi ertekkent egy pozitiv egesz szamot adunk meg, pl: return 1; .
-Ha az elso objektum kisebb mint a masodik objektum, akkor visszateritesi ertekkent egy negativ egesz szamot adunk meg, pl: return -1; .
-Ha az elso objektum egyenlo a masodik objektummal, akkor visszateritesi ertekkent nullat adunk meg
-return 0;
-A comparable interface nagyon hasznos ha elemeket akarunk rendezni.
