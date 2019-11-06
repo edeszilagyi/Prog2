@@ -974,7 +974,7 @@ int main()
                 <title>Prolog családfa</title>
                 <para>Ágyazd be a Prolog családfa programot C++ vagy Java programba! Lásd
                     para_prog_guide.pdf!</para>
-                <para>Források:</para>
+                <para>Források:<link>https://github.com/edeszilagyi/Prog2/tree/master/6.het/Prolog</link></para>
                 <para>A Prolog egy olyan programozási nyelv, melynek segítségével matematikai
                     logikai formulákat tudunk vizsgálni. A matematikai logikáról ez a feladat nem
                     fog részletesebb tájékoztatást nyújtani, a fentebb lévő pdf-ben találhattok
