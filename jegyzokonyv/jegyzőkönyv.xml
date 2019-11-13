@@ -1152,7 +1152,7 @@ nagyapja(X, Z) :- apja(X, Y), (apja(Y, Z); anyja(Y, Z)).</programlisting>
                 </sect1>
         </chapter>
         <chapter>
-            <title>8. hét - „Helló, Schwarzenegger!”</title>
+            <title>8. hét - „Helló, Lauda!”</title>
             <subtitle>10. hét Kivételkezelés. és 12. hét Reflexió. A fordítást és a
                 kódgenerálást támogató nyelvi elemek (annotációk, attribútumok). Összevonva.</subtitle>
             <sect1>
