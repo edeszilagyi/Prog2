@@ -1051,18 +1051,105 @@ nagyapja(X, Z) :- apja(X, Y), (apja(Y, Z); anyja(Y, Z)).</programlisting>
                 <para>Javítsunk valamit a ActivityEditor.java JavaFX programon!</para>
                 <para><link>https://github.com/nbatfai/future/tree/master/cs/F6</link></para>
                 <para>Itt láthatjuk működésben az alapot: <link>https://www.twitch.tv/videos/222879467</link></para>
-                <para/>
+                <para>A future projekt eredeti célja egy város alternatív jövoinek legenerálása, a
+                    legenerált jövők elemzése volt. A future6-hoz készült egy tulajdonság editor,
+                    melyben a hallgatók az adott nap tevékenységeit tudták feljegyezni.</para>
+                <para>A javításom a programon a lett hogy a főbb címkék alapból ki vannak nyitva,
+                    így megkönnyítik a felhasználó dolgát a program használata közben, mivel így
+                    egből észreveszi azt a dolgot amit keres. </para>
+                <para>A program működés közben:</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/future.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
             </sect1>
             <sect1>
                 <title>OOCWC Boost ASIO hálózatkezelése</title>
                 <para>Mutassunk rá a scanf szerepére és használatára! <link>https://github.com/nbatfai/robocaremulator/blob/master/justine/rcemu/src/carlexer.ll</link></para>
-                <para/>
+                <para>Scanf beépített függvény segítségével adatokat olvashatunk be, amelyet
+                            típus szerint eltérő módon kell megadni.</para>
+                <para>A scanf függvény argumentumában % jel után adjuk meg a beolvasott adat
+                            tipusának megfelelő jelölést, amely nagyon sok féle lehet, de a
+                            legfontosabbak és a leggyakrabban használtak a következők:</para>
+                <para>1) %d: adatot decimális számmá alakít</para>
+                <para>2) %x: adatot hexadecimális számmá alakít</para>
+                <para>3) %f: adatot lebegőpontos számmá alakít</para>
+                <para>4) %s: adatot stringgé alakít</para>
+                <para>A carlexer.II programban a scanf-nek az a szerepe, hogy különböző
+                            adatokat olvas be, amelyek segítségével megadhatóak az autók
+                            kezdőpozíciói, lehetséges útvonalai illetve az autó poziciója,
+                            elhelyezkedese a program teljes működésesorán.</para>
+                
             </sect1>
-            <sect1>
-                <title>BrainB</title>
-                <para>Mutassuk be a Qt slot-signal mechanizmust ebben a projektben: <link>https://github.com/nbatfai/esporttalent-search</link></para>
-                <para/>
-            </sect1>
+            <sect1><title>BrainB</title><para>Mutassuk be a Qt slot-signal mechanizmust ebben a
+                    projektben:
+                        <link>https://github.com/nbatfai/esporttalent-search</link></para>
+                <para><emphasis
+                        role="underline">Signal-slot mechanizmus</emphasis>:</para>
+                <para>A signalok es slotok biztositják az objektumok közötti
+                    kommunikációt.</para>
+                <para> A signals and slots mechanizmus teszi egyedivé a
+                    Qt-t mivel ez teljes egészében Qt-specifikus,és ez a mechanizmus különbözteti
+                    meg más toolkitektől a Qt-t.</para>
+                <para> Míg más toolkitek a callback
+                    függvénypointer segítségével értesítenek egy esemény bekövetkeztéről, addig a
+                    Qt-ben lehetőségünk van egy alternatív mechanizmust alkalmazni, ami a
+                    Slot-signal mechanizmus.</para>
+                <para>Signal</para>
+                <para> A Qt-ban az objektumok
+                    képesek magukból signalokat kiadni, sugarozni(emit), ami akkor történik, ha az
+                    objektummal történt valami fontos, például megváltozott az állapota, a BrainB
+                    esetében ez akkor történik meg amikor rákattintunk a négyzetbeli pontra.
+                    </para>
+                <para> Csak az az osztály és az osztály alosztályai képesek signalt
+                    sugározni, amelyikben definiálva van a signal. Amikor sugároz a signal, akkor a
+                    slot egyből elvégződik, mint egy függvényhivás.</para>
+                <para> A signalok
+                    automatikusan generálodnak a moc által, ezért ezeket nem kell a .cpp fileban
+                    implementálni, és nincs return értékuk.</para>
+                <para>Slot</para>
+                <para> A Qt-ban
+                    az objektumoknak lehetnek slotjaik is, amelyek olyan speciális
+                    tagfüggvények,melyek képesek érzékelni azt, ha egy másik objektumnak
+                    megváltozott az állapota.</para>
+                <para>Ha több slot van egy signálhoz
+                    kapcsolódva, akkor a slotok egymás utan kerülnek elvágzásre.A slotok egyszerű
+                    c++ függvények, azzal a különbséggel, hogy ezekhez hozzá lehet kapcsolni
+                    signalokat. A slot argumentumoknak nem lehet alapértelmezett értékük, mindig
+                    saját egyedi értékeket adjunk nekik.</para>
+                <para>3 féle slot
+                    letezik:</para>
+                <para>1.Public slot: olyan slotokat tartalmaz, amelyekhez bárki
+                    kapcsolhat signalt, ez nagyon hasznos mert az olyan objektumok között is
+                    megoszthatunk információkat, amelyek egyébkent nem tudnak egymásrol semmit, de
+                    össszekapcsoljuk a signaljaikat és slotjaikat.</para>
+                <para>2.Protected slot:
+                    olyan slotokat tartalmaz, amelyekhez ez az osztaly illetve alosztályai
+                    kapcsolhatnak signalokat. Ez olyan slotoknak lehet hasznos, amelyeket ebben az
+                    osztályban impelementáljuk.</para>
+                <para>3.Private slot: csak ez az osztály
+                    kapcsolhat hozzá signalt, ez olyan szorosan kapcsolt osztályok eséten hasznos,
+                    amelyekhez még az alosztályai sem kapcsolódhatnak.</para>
+                <para>Definiálhatjuk a
+                    slotokat virtualként is.</para>
+                <para> Amikor a signal-t a slot-hoz kötjük,
+                    tulajdonképp elmondjuk a slot-nak, hogy melyik objektum
+                    állapotváltozására kell figyelnie. Figyeljünk fel arra a tényre, hogy a
+                    megfigyelt</para>
+                <para>objektumnak fogalma sincs róla, hogy valaki figyel-e rá.
+                    A kapcsolatért, azért,</para>
+                <para>hogy történjen valami, lényegében a slot
+                    objektuma felel.</para>
+                <para> A signal-slot kapcsolatok miatt a számított adatok
+                    értéke bármely „számszerű” adat megváltozásakor újraszámolódik.</para>
+                <para>És a programról kép működése közben:</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/BrainB.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                </sect1>
         </chapter>
         <chapter>
             <title>8. hét - „Helló, Schwarzenegger!”</title>
