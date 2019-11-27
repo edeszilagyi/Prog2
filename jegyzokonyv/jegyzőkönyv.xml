@@ -1159,7 +1159,122 @@ nagyapja(X, Z) :- apja(X, Y), (apja(Y, Z); anyja(Y, Z)).</programlisting>
                 <title>Port scan</title>
                 <para>Mutassunk rá ebben a port szkennelő forrásban a kivételkezelés szerepére!</para>
                 <para><link>https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#id527287</link></para>
-                <para/>
+                <para>A KapuSzkenner.java segítségével megnézhetjük, hogy gépünk éppen milyen portokat figyel. A kivételkezelés try blokkjában az argumentumként megkapott gép 1024 alatti portjain
+                    próbálunk meg TCP kapcsolatot létesíteni. Ha az adott gépen egy szerverfolyamat figyeli az adott portot,
+                    akkor ezt ki is iratjuk.</para>
+                <programlisting>public class KapuSzkenner {
+    public static void main(String[] args) {
+        for (int i = 0; i &lt; 1024; ++i)
+            try {
+                java.net.Socket socket = new java.net.Socket(args[0], i);
+                System.out.println(i + " figyeli");
+                socket.close();</programlisting>
+                <para>Portszkennelést páldul akkor használunk, mikor szeretnénk meggyőződni arról, hogy egy általunk üzemeltetett 
+                    szerver nem fed fel túl sokat (tehát nem rendelkezik feleslegesen nyitva levo portokkal).</para>
+                <para>Ezen program működési elve, hogy 0-tól 1024-ig végigmegy az összes porton, és megpróbál egy socketet
+                    nyitni a java.net.Socket osztály segítségével. Amennyiben elolvassuk az ehhez az osztályhoz tartozó dokumentációt, azt láthatjuk, 
+                    hogy amennyiben nem tudunk csatlakozni, úgy SecurityException hibát fog dobni a meghívás.</para>
+                <para>Ennek köszönhetően egyszerűen, amennyiben nem tudunk socketet nyitni az adott porton, tudjuk, hogy nem elérhető.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/port1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/port2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+            </sect1>
+            <sect1>
+                <title>AOP</title>
+                <para>Szőj bele egy átszövő vonatkozást az első védési programod Java átiratába! (Sztenderd védési
+                    feladat volt korábban.)</para>
+                <para>Néhány alap fogalom A csatlakozási pontvagy joint pont egy olyan pont a programban amikor valami történik. 
+                    Ilyen például amikor egy metódus meghívódik vagy egy kivételt throwolunk,inicializálunk egy objektumot stb. 
+                    A pointcutnak van egy jobb és bal oldala kettospont választja el a kettőt.Bal oldalon a pointcut neve és paraméterei állnak. 
+                    A paraméterekben az elérhető adatokhoz férhetünk hozzá ha lefut a metódus. A jobboldalt maga a pointcut szerepel.
+                    Ez általában a call vagy az execution. Ebben írjuk meg, hogy mire utal a pointcut a valódi osztályunkban.
+                    Advice-ok lényegében a before, after és around. Tehát, hogy a metódus hívása elott,után vagy közben ˝
+                    esetleg helyett fusson le. A within paranccsal mondhatjuk meg,hogy melyik osztályból akarjuk használni.
+                    A target az a java objektum ami a metódust hívja.Argumentumok azok az értékek amiket a metódusban
+                    hívunk.</para>
+                <programlisting>private long egyes = 0;
+private long nullas = 0;
+pointcut pushback() : execution(public void push_back(char));
+before(char ch): pushback() &amp;&amp; args(ch){
+if(ch == ’1’){
+egyes++;
+} else {
+nullas++;
+}
+}
+pointcut main() : execution(public static void main(String[]));
+after() : main(){
+System.out.println("Egyesek száma: " + egyes);
+System.out.println("Nullások száma: " + nullas);
+}</programlisting>
+                <para>Vegyük elsonek példának az egyesek és nullások megszámlálását. Ugyebár deklarálunk és inicializálunk 2
+                    változót amibe majd tároljuk a megszámolt értékeket. Aztán jön a pointcutunk aminek a neve pushback lesz.
+                    A jobb oldala maga a point cut. Tehát oda tesszük a pointcutot ahol lefut a fo program push_back(char)
+                    függvénye. Aztán mielott ez lefut az argumentum karakterjét átadjuk és megnézzük egyes-e vagy nulla.
+                    Majd létrehozunk egy új pointcutot a mainre. És megmondjuk, hogy miután lefut a main írjuk ki a megszámol egyesek és nullások számát.
+                    Most nézzük meg a kiir függvényre való pointcut-unkat:</para>
+                <programlisting>public pointcut meghiv(LZWBinFa.Csomopont n, PrintWriter os)
+: call(void LZWBinFa.kiir(LZWBinFa.Csomopont, PrintWriter)) &amp;&amp; args(n,os);
+after(LZWBinFa.Csomopont n, PrintWriter os) : meghiv(n, os)
+{
+    try{
+    os=new PrintWriter("preorder.txt");
+    preOrder(n,os);
+    os.flush();
+    }
+    catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    depth = 0;
+    try{
+    os=new PrintWriter("postorder.txt");
+    postOrder(n,os);
+    os.flush();
+    }
+    catch (FileNotFoundException e) {
+    e.printStackTrace();
+    }
+}
+public void preOrder(LZWBinFa.Csomopont n, PrintWriter p)
+{
+    if (n != null)
+    {
+        ++depth;
+        for (int i = 0; i &lt; depth; ++i)
+        p.print("---");
+        p.print(n.getBetu () + "(" + depth + ")\n");
+        preOrder (n.getBalNulla (), p);
+        preOrder (n.getJobbEgy (), p);
+        --depth;
+    }
+}
+public void postOrder(LZWBinFa.Csomopont n, PrintWriter p)
+{
+    if (n != null)
+    {
+        ++depth;
+        postOrder (n.getBalNulla (), p);
+        postOrder (n.getJobbEgy (), p);
+        for (int i = 0; i &lt; depth; ++i)
+        p.print("---");
+        p.print(n.getBetu () + "(" + depth + ")\n");
+        --depth;
+}
+}</programlisting>
+                <para>Na itt a pointcutunkat a kiir függvény hívására tesszük.Argumentumként átvesszük a printwriter és a csomópont n-t. 
+                    Aztán a már megszokott pre és post order bejárásunkat láthatjuk függvényként ez bevprogról
+                    már ismeros volt. Ugyebár alapból inorder-ben iratjuk ki. Aztán megmondjuk, hogy minden egyes kiir
+                    hívás után hajtódjon végre a másik két kiir függvény is. Fontos a try-catch szerkezet máskülönben errort
+                    kapunk, hogy nincs ami elkapja az exceptiont. Emellett nagyon fontos szerepet játszik még az, hogy 2
+                    FileWriter os-t hozok létre. És mind a 2-t flush-ölöm.Ugyebár a flush a bufferben lévo stringet azonnal ˝
+                    kiírja.</para>
             </sect1>
             <sect1>
                 <title>Android Játék</title>
