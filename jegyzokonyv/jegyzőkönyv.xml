@@ -1268,18 +1268,24 @@ public void postOrder(LZWBinFa.Csomopont n, PrintWriter p)
         --depth;
 }
 }</programlisting>
-                <para>Na itt a pointcutunkat a kiir függvény hívására tesszük.Argumentumként átvesszük a printwriter és a csomópont n-t. 
-                    Aztán a már megszokott pre és post order bejárásunkat láthatjuk függvényként ez bevprogról
-                    már ismeros volt. Ugyebár alapból inorder-ben iratjuk ki. Aztán megmondjuk, hogy minden egyes kiir
-                    hívás után hajtódjon végre a másik két kiir függvény is. Fontos a try-catch szerkezet máskülönben errort
-                    kapunk, hogy nincs ami elkapja az exceptiont. Emellett nagyon fontos szerepet játszik még az, hogy 2
-                    FileWriter os-t hozok létre. És mind a 2-t flush-ölöm.Ugyebár a flush a bufferben lévo stringet azonnal ˝
-                    kiírja.</para>
+                <para>Na itt a pointcutunkat a kiir függvény hívására tesszük.Argumentumként
+                    átvesszük a printwriter és a csomópont n-t. Aztán a már megszokott pre és post
+                    order bejárásunkat láthatjuk függvényként ez bevprogról már ismeros volt.
+                    Ugyebár alapból inorder-ben iratjuk ki. Aztán megmondjuk, hogy minden egyes kiir
+                    hívás után hajtódjon végre a másik két kiir függvény is. Fontos a try-catch
+                    szerkezet máskülönben errort kapunk, hogy nincs ami elkapja az exceptiont.
+                    Emellett nagyon fontos szerepet játszik még az, hogy 2 FileWriter os-t hozok
+                    létre. És mind a 2-t flush-ölöm.Ugyebár a flush a bufferben lévo stringet
+                    azonnal kiírja.</para>
             </sect1>
             <sect1>
                 <title>Android Játék</title>
                 <para>Írjunk egy egyszerű Androidos „játékot”! Építkezzünk például a 2. hét „Helló, Android!” feladatára!</para>
-                <para/>
+                <para>Egy működo androidos játékot kellett írni, amit én ezt a alábbi youtube
+                    tutorial alapján valósítottam meg:<link>https://www.youtube.com/watch?v=apDL78MFR3o</link>
+                    A játék egy tictactoe játék, ami a játék szabályai alapján működik, számolja a
+                    játékosok pontjait, valamint egy reset funkció is bele van építve, ami az eddig
+                    összegyűjtött pontokat nullázza.</para>
             </sect1>
         </chapter>
         <chapter>
