@@ -1286,6 +1286,16 @@ public void postOrder(LZWBinFa.Csomopont n, PrintWriter p)
                     A játék egy tictactoe játék, ami a játék szabályai alapján működik, számolja a
                     játékosok pontjait, valamint egy reset funkció is bele van építve, ami az eddig
                     összegyűjtött pontokat nullázza.</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/android1.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/android2.png"/>
+                        </imageobject>
+                    </inlinemediaobject></para>
             </sect1>
         </chapter>
         <chapter>
