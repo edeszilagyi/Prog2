@@ -1307,12 +1307,105 @@ public void postOrder(LZWBinFa.Csomopont n, PrintWriter p)
                 <para>Az alap feladat megoldása, +saját kézzel rajzolt képet is ismerjen fel,</para>
                 <para><link>https://progpater.blog.hu/2016/11/13/hello_samu_a_tensorflow</link>-bol Háttérként ezt vetítsük le:</para>
                 <para><link>https://prezi.com/0u8ncvvoabcr/no-programming-programming/</link></para>
-                <para/>
+                <para>   Az MNIST adatállomány kézzel írott számok képeit tartalmazza, pontosabban
+                    60 ezer képet használ a training fázisban, és 10 ezer képet a tesztelés során,
+                    ezeknek a képeknek a segítségevel tudja megállapítani a felhasználó által
+                    inputként megadott 28x28-as képről, hogy az milyen számjegyet takar.</para>
+                <para>   Mindegyik kép 28x28 pixel, a képet átalakítjuk vector formájúra, amely
+                    28*28=784 komponenst tartalmaz. Az adatállomány mindegyik eleméhez egy címke is
+                    tartozik, amely egy 0 és 9 közötti számjegy, s a képen látható számot mutatja.
+                    Esetünkben a címke egy 10 komponensű „one-hot” vektor. Az 1 számjegyet egyetlen
+                    pozíción, az n-ediken tartalmazza, annak megfelelően, hogy melyik számjegy
+                    látható a képen, a többi komponens 0. A gépi tanítási elvet követve, adataink
+                    egy részét – többnyire a többségét – tanításra, egy további résztét modellünk
+                    jóságának mérésére használjunk.A bemeneti tenzor 784 db számból áll például egy
+                    pont koordinátái a 784 dimenziós térben.Az eredmény pedig 10db értek 0 és 9
+                    közötti számokat tartalmazza, ami azt jelenti, hogy a rendszer százalékosan
+                    fejezi ki, hogy szerinte melyik szám van a képen, például egy írott 6-osra azt
+                    mondja, hogy 10%, hogy 8, 20% hogy 9, és 70%, hogy 6-os számot lát. A MNIST
+                    85%-os pontossággal tudja helyesen megállapitani egy kézzel írott szamjegyről,
+                    hogy az pontosan melyik számjegy.</para>
+                <para>    Ha egy egyedről/tárgyról el kell döntenünk, hogy több különböző
+                    egyed/tárgy közül melyikkel milyen valószínűséggel egyezik meg, akkor erre a
+                    célra a „softmax” függvény használható, mivel a „sotfmax” megad egy listát az
+                    egyezési valószínűségekre vonatkozóan, ahol az értékek 0 és 1 közöttiek, és az
+                    összegük 1, tehét a „sotfmax” valószínűségeloszlást ad meg, egy x inputhoz
+                    kiszámítja az egyes osztályokba tartozás súlyait, azután megadja az osztályokba
+                    tartozási valószínűségeket.</para>
+                <para>     A TensorFlow egy nyílt forráskódú, alacsonyabb szintű nurális háló
+                    library, ami többek között lehetőséget nyújt neurális hálók összerakására is. A
+                    TensorFlow könyvtárban rendelkezésre álló segédanyagok lehetővé teszik
+                    színvonalas modellek gyors és egyszerű létrehozását. A TensorFlow rendszerben
+                    kifejlesztett számítások változatlanul vagy csekély változtatással
+                    végrehajthatók nagyon eltérő hardver eszközökön a mobil telefonoktól és
+                    tabletektől kezdve, grafikus kártyákon (GPU) át, sok számítógépből álló
+                    elosztott számítógép-rendszerekig. A TensorFlow roppant flexibilis, nagyon
+                    széles körű algoritmusok megvalósítására alkalmas, beleértve a deep neural
+                    network – sokrétegű neurális háló – alkalmazásait, például a
+                    beszédfelismerésben, a számítógépi látásban, megjelenítésben, a robotikában, az
+                    információ kinyerésben, a számítógépek elleni támadások felderítésében, és az
+                    agykutatásban. TensorFlow-val tenzor transzformációs gráfokat lehet összerakni.
+                    A TensorFlow számítást egy irányított gráf írja le. Adatáramlás a gráf élei
+                    mentén történik. A TensorFlow gráfban mindegyik csúcs egy műveletet
+                    reprezentálhat és mindegyik csúcsnak lehet nulla vagy több inputja, ugyanígy
+                    nulla vagy több outputja. A gráf normál élei mentén áramló értékek tenzorok,
+                    tetszőleges dimenziójú vektorok. Egy-egy elem típusát a gráf konstruálásakor
+                    specifikálják. Lehetnek a gráfban speciális élek is, amelyek mentén nem történik
+                    adatáramlás, hanem kontrol célokat szolgálnak. A használat előtt a TensorFlow-t
+                    importálni kell: import tensorflow as tf. A művelet végzéséhez egy x változó
+                    definiálása: x=tf.placehorder(tf.float32, [None, 784]). A modell implementálása
+                    mindössze egyetlen sor: y=tf.nn.softmax(tf.matmul(x,W)+b).</para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/mnist1.png"/>
+                        </imageobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/mnist2.png"/>
+                    </imageobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/mnist3.png"/>
+                    </imageobject>
+                    </inlinemediaobject></para>
+            </sect1>
+            <sect1>
+                <title>CIFAR-10</title>
+                <para>Az alap feladat megoldása, +saját fotót is ismerjen fel,</para>
+                <para><link>https://progpater.blog.hu/2016/12/10/hello_samu_a_cifar-10_tf_tutorial_peldabol</link></para>
+                <para></para>
             </sect1>
             <sect1>
                 <title>Android telefonra a TF objektum detektálója</title>
                 <para>Telepítsük fel, próbáljuk ki!</para>
-                <para/>
+                <para>A TensorFlow egy szoftverkönyvtár, mely lehetové teszi gépi tanulási
+                    algoritmusok végrehajtását. Ezek a számítások nemcsak számítógéprendszereken, de
+                    akár mobiltelefonokon is végrehajthatóak. A TensorFlow számítást egy irányított
+                    gráf írja le, melynek élein keresztül adatok (tenzorok) áramlása történik. A
+                    gráf csúcsai műveleteket reprezentálnak, a csúcsok inputjainak és outputjainak
+                    száma lehet nulla vagy több. A gráfok szerkezetének áttekintését a TensorBoard
+                    nevű vizualizációs eszközzel érhetjük el. A TensorFlow segítségével tehát
+                    képesek vagyunk betanítani Androidos készülékünket különféle objektumok
+                    detektálására. A teszteléshez én a <link>https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android</link> projektet használtam . Ez az objektumfelismero alkalmazás a Google TensorFlow
+                    gépi tanulás modelljét használja fel. A hátsó kamera segítségével valós idoben
+                    próbálja érzékelni a képen látható tárgyakat. A tárgy nevén kívül egy 2
+                    tizedesjegyű számértéket (százalékot) is kapunk, amely azt érzékelteti, hogy
+                    mennyire biztos a felismerésben. Az alkalmazás viszonylag sok nyelvet ismer,
+                    magyar nyelv hiányában én a tárgyak angol megfeleloit kaptam. Az informatikai
+                    eszközök felismerésével nem volt különösebb problémám. Jó értékeket és
+                    megnevezést kaptam többek között egérre, billentyűzetre,ollóra is. </para>
+                <para><inlinemediaobject>
+                        <imageobject>
+                            <imagedata fileref="kepek/tf2.jpg"/>
+                        </imageobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/tf3.jpg"/>
+                    </imageobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/tf4.jpg"/>
+                    </imageobject>
+                    <imageobject>
+                        <imagedata fileref="kepek/tf5.jpg"/>
+                    </imageobject>
+                    </inlinemediaobject></para>
             </sect1>
         </chapter>
     </part>
