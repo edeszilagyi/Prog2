@@ -1371,7 +1371,51 @@ public void postOrder(LZWBinFa.Csomopont n, PrintWriter p)
                 <title>CIFAR-10</title>
                 <para>Az alap feladat megoldása, +saját fotót is ismerjen fel,</para>
                 <para><link>https://progpater.blog.hu/2016/12/10/hello_samu_a_cifar-10_tf_tutorial_peldabol</link></para>
-                <para></para>
+                <para>A CIFAR egy gépi tanulási adatkészlet, ami képek segítségével lehet tanítani, hogy felismerje, hogy milyen képen mi található. 32x32 felbontású képekkel dolgozik. Az alap adatszerkezetében több millió kép
+                    található, de lehet használni saját képeket is, és így lehet tanítani.</para>
+                <para>Elsonek is be kell tanítani a programot a képek felismerésére. Ehez a képekből bináris álományt kell
+                    készíteni, amit a program értelmezni tud. Ezért kell egy olyan algoritmus, ami becsomagolja a képet.</para>
+                <programlisting>from PIL import Image
+import numpy as np
+im = Image.open(’image.png’)
+im = (np.array(im))
+r = im[:,:,0].flatten()
+g = im[:,:,1].flatten()
+b = im[:,:,2].flatten()
+label = [1]
+out = np.array(list(label) + list(r) + list(g) + list(b),np.uint8)
+out.tofile("out.bin")
+</programlisting>
+                <para>A betanítás után jöhet a kép felismerése. Ezt az elkészített bináris álományra kell elvégezni, úgy hogy a
+                    példaprogram cifar10_eval.py fájlt kicsit módosítani kell, hogy ne számoljon pontosságot, mert a
+                    feladat szempontjából teljesen lényegtelen, itt csak az kell, hogy melyik csoportba sorolható bele a kép.</para>
+                <programlisting>.
+.
+.
+# while step &lt; num_iter and not coord.should_stop():
+# predictions = sess.run([top_k_op])
+predictions = sess.run([top_k_op])
+print(sess.run(logits[0]))
+classification = sess.run(tf.argmax(logits[0], 0))
+cifar10classes = ["airplane", "automobile", "bird", "cat", "deer", "dog ←-
+", "frog", "horse", "ship", "truck"]
+print(cifar10classes[classification])
+true_count += np.sum(predictions)
+step += 1
+# Compute precision @ 1.
+precision = true_count / total_sample_count
+# print(’%s: precision @ 1 = %.3f’ % (datetime.now(), precision))
+.
+.
+.</programlisting>
+                <para>Itt látszik is a módosítás, hogy a pontosság ki van kommentelve, és meg vannak
+                    adva a felismeréshez szükséges osztályok. Az ellenörzés csak egyszer hajtódik
+                    végre, majd  meg kell keresni a legnagyobb indexel rendelkező értéket, majd
+                    meghívásra kerül rá az sess.run funkció, így elkezdődik a felismerés és
+                    visszatér a megtalált értékkel, utána a cifar10classes tömbből kikérdezi a
+                    típust, majd kiírja.</para>
+                <para>Mivel csak egy darab képet ismertetünk fel a programmal ezért még a cifar10.py fájlban módosítani
+                    kell a batch_size értékét 1-re.</para>
             </sect1>
             <sect1>
                 <title>Android telefonra a TF objektum detektálója</title>
